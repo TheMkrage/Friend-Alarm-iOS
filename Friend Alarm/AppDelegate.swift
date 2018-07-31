@@ -15,7 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // ViewController and TabItem setup
+        let discoverViewController = UINavigationController(rootViewController: DiscoverViewController())
+        let myOffersViewController = UINavigationController(rootViewController: ActiveOffersViewController())
+        let profileViewController = UINavigationController(rootViewController: ProfileViewController())
+        
+        let tabViewController = UITabBarController()
+        tabViewController.setViewControllers([discoverViewController, myOffersViewController, profileViewController], animated: false)
+        tabViewController.selectedIndex = 0
+        
+        tabViewController.tabBar.items?[0].title = "Discover"
+        tabViewController.tabBar.items?[1].title = "My Offers"
+        tabViewController.tabBar.items?[2].title = "Profile"
+        
+        self.window?.rootViewController = tabViewController
+        
+        self.window?.makeKeyAndVisible()
         return true
     }
 

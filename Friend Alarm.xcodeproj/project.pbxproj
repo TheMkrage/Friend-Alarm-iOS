@@ -8,20 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */; };
-		7EE8DEA4210FA44B005A8659 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA3210FA44B005A8659 /* ViewController.swift */; };
-		7EE8DEA7210FA44B005A8659 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA5210FA44B005A8659 /* Main.storyboard */; };
 		7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA8210FA44B005A8659 /* Assets.xcassets */; };
 		7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */; };
+		7EE8DEB4210FA990005A8659 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEB3210FA990005A8659 /* TitleLabel.swift */; };
+		7EE8DEB9210FAAC5005A8659 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEB8210FAAC5005A8659 /* DS-DIGI.TTF */; };
+		7EE8DEBF21110EAB005A8659 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */; };
+		7EE8DEC221110EFC005A8659 /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */; };
+		A254869C3F3A6C30BF2ABEC3 /* Pods_Friend_Alarm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCE47CB75B68D97E96FCEE0 /* Pods_Friend_Alarm.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		023AFA0CAEAFD58DB4DCF3F4 /* Pods-Friend Alarm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friend Alarm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Friend Alarm/Pods-Friend Alarm.debug.xcconfig"; sourceTree = "<group>"; };
+		5BCE47CB75B68D97E96FCEE0 /* Pods_Friend_Alarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Friend_Alarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE8DE9E210FA44B005A8659 /* Friend Alarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Friend Alarm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7EE8DEA3210FA44B005A8659 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7EE8DEA6210FA44B005A8659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7EE8DEA8210FA44B005A8659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EE8DEAB210FA44B005A8659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EE8DEAD210FA44B005A8659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EE8DEB3210FA990005A8659 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		7EE8DEB8210FAAC5005A8659 /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
+		7EE8DEBC210FB209005A8659 /* PingFang-SC-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PingFang-SC-Light.ttf"; sourceTree = "<group>"; };
+		7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
+		7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewController.swift; sourceTree = "<group>"; };
+		A5D31E279D5AB0781E057CDC /* Pods-Friend Alarm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friend Alarm.release.xcconfig"; path = "Pods/Target Support Files/Pods-Friend Alarm/Pods-Friend Alarm.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +38,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A254869C3F3A6C30BF2ABEC3 /* Pods_Friend_Alarm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47EDC3F3806F7EE13E6B58A9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				023AFA0CAEAFD58DB4DCF3F4 /* Pods-Friend Alarm.debug.xcconfig */,
+				A5D31E279D5AB0781E057CDC /* Pods-Friend Alarm.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7EE8DE95210FA44B005A8659 = {
 			isa = PBXGroup;
 			children = (
 				7EE8DEA0210FA44B005A8659 /* Friend Alarm */,
 				7EE8DE9F210FA44B005A8659 /* Products */,
+				47EDC3F3806F7EE13E6B58A9 /* Pods */,
+				F0CFB03F2B007136EE4D4CA6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +75,49 @@
 		7EE8DEA0210FA44B005A8659 /* Friend Alarm */ = {
 			isa = PBXGroup;
 			children = (
+				7EE8DEC021110ED8005A8659 /* ViewControllers */,
+				7EE8DEBD21110E2A005A8659 /* Views */,
 				7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */,
-				7EE8DEA3210FA44B005A8659 /* ViewController.swift */,
-				7EE8DEA5210FA44B005A8659 /* Main.storyboard */,
 				7EE8DEA8210FA44B005A8659 /* Assets.xcassets */,
 				7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */,
 				7EE8DEAD210FA44B005A8659 /* Info.plist */,
+				7EE8DEB5210FAA7C005A8659 /* fonts */,
 			);
 			path = "Friend Alarm";
+			sourceTree = "<group>";
+		};
+		7EE8DEB5210FAA7C005A8659 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7EE8DEB8210FAAC5005A8659 /* DS-DIGI.TTF */,
+				7EE8DEBC210FB209005A8659 /* PingFang-SC-Light.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		7EE8DEBD21110E2A005A8659 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7EE8DEB3210FA990005A8659 /* TitleLabel.swift */,
+				7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7EE8DEC021110ED8005A8659 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F0CFB03F2B007136EE4D4CA6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5BCE47CB75B68D97E96FCEE0 /* Pods_Friend_Alarm.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EE8DEB0210FA44B005A8659 /* Build configuration list for PBXNativeTarget "Friend Alarm" */;
 			buildPhases = (
+				E450AE173E3BEDE27840D99A /* [CP] Check Pods Manifest.lock */,
 				7EE8DE9A210FA44B005A8659 /* Sources */,
 				7EE8DE9B210FA44B005A8659 /* Frameworks */,
 				7EE8DE9C210FA44B005A8659 /* Resources */,
+				F33F8EC262D6462F24E16976 /* [CP] Embed Pods Frameworks */,
+				ED8BDD8FD09C2A848454221B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,18 +184,68 @@
 			files = (
 				7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */,
 				7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */,
-				7EE8DEA7210FA44B005A8659 /* Main.storyboard in Resources */,
+				7EE8DEB9210FAAC5005A8659 /* DS-DIGI.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E450AE173E3BEDE27840D99A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ED8BDD8FD09C2A848454221B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Friend Alarm/Pods-Friend Alarm-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F33F8EC262D6462F24E16976 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Friend Alarm/Pods-Friend Alarm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7EE8DE9A210FA44B005A8659 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EE8DEA4210FA44B005A8659 /* ViewController.swift in Sources */,
+				7EE8DEC221110EFC005A8659 /* MyAlarmViewController.swift in Sources */,
+				7EE8DEB4210FA990005A8659 /* TitleLabel.swift in Sources */,
+				7EE8DEBF21110EAB005A8659 /* SubtitleLabel.swift in Sources */,
 				7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,14 +253,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7EE8DEA5210FA44B005A8659 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7EE8DEA6210FA44B005A8659 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -272,9 +373,11 @@
 		};
 		7EE8DEB1210FA44B005A8659 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 023AFA0CAEAFD58DB4DCF3F4 /* Pods-Friend Alarm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MD9NK2MQ3;
 				INFOPLIST_FILE = "Friend Alarm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "TheMkrage.Friend-Alarm";
@@ -286,9 +389,11 @@
 		};
 		7EE8DEB2210FA44B005A8659 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5D31E279D5AB0781E057CDC /* Pods-Friend Alarm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MD9NK2MQ3;
 				INFOPLIST_FILE = "Friend Alarm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "TheMkrage.Friend-Alarm";
