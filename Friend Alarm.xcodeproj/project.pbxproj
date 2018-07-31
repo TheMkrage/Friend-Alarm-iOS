@@ -14,6 +14,7 @@
 		7EE8DEB9210FAAC5005A8659 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEB8210FAAC5005A8659 /* DS-DIGI.TTF */; };
 		7EE8DEBF21110EAB005A8659 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */; };
 		7EE8DEC221110EFC005A8659 /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */; };
+		7EE8DEC421111C6D005A8659 /* SmallTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEC321111C6D005A8659 /* SmallTextLabel.swift */; };
 		A254869C3F3A6C30BF2ABEC3 /* Pods_Friend_Alarm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCE47CB75B68D97E96FCEE0 /* Pods_Friend_Alarm.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		7EE8DEBC210FB209005A8659 /* PingFang-SC-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PingFang-SC-Light.ttf"; sourceTree = "<group>"; };
 		7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
 		7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewController.swift; sourceTree = "<group>"; };
+		7EE8DEC321111C6D005A8659 /* SmallTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTextLabel.swift; sourceTree = "<group>"; };
 		A5D31E279D5AB0781E057CDC /* Pods-Friend Alarm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friend Alarm.release.xcconfig"; path = "Pods/Target Support Files/Pods-Friend Alarm/Pods-Friend Alarm.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 			children = (
 				7EE8DEB3210FA990005A8659 /* TitleLabel.swift */,
 				7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */,
+				7EE8DEC321111C6D005A8659 /* SmallTextLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EE8DEC421111C6D005A8659 /* SmallTextLabel.swift in Sources */,
 				7EE8DEC221110EFC005A8659 /* MyAlarmViewController.swift in Sources */,
 				7EE8DEB4210FA990005A8659 /* TitleLabel.swift in Sources */,
 				7EE8DEBF21110EAB005A8659 /* SubtitleLabel.swift in Sources */,

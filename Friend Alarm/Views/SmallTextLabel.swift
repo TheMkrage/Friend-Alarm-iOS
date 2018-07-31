@@ -1,5 +1,5 @@
 //
-//  SubtitleLabel.swift
+//  SmallTextLabel.swift
 //  Friend Alarm
 //
 //  Created by Matthew Krager on 7/31/18.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class SubtitleLabel: UILabel {
-
+class SmallTextLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initialize()
@@ -21,6 +20,6 @@ class SubtitleLabel: UILabel {
     }
     
     func initialize() {
-        self.font = UIFont(name: "Helvetica-Medium", size: 17)
+        self.font = UIFont(name: "Helvetica Neue-Thin", size: 12)
     }
 }
