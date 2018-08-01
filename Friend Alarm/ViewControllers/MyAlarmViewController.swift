@@ -24,6 +24,12 @@ class MyAlarmViewController: UIViewController {
         
         self.title = "My Alarm"
         
+        self.alarms.append(Alarm())
+        self.alarms.append(Alarm())
+        self.alarms.append(Alarm())
+        self.alarms.append(Alarm())
+        self.alarms.append(Alarm())
+        
         self.timeUntilAlarmLabel.font = UIFont(name: "DS-Digital", size: 64)
         self.timeUntilAlarmLabel.textColor = UIColor(named: "alarm-red")
         self.timeUntilAlarmLabel.text = "alarm off"
@@ -34,6 +40,7 @@ class MyAlarmViewController: UIViewController {
         self.alarmTable.delegate = self
         self.alarmTable.dataSource = self
         self.alarmTable.separatorStyle = .none
+        self.alarmTable.rowHeight = 70
         
         self.view.addSubview(self.alarmSwitch)
         self.view.addSubview(self.timeUntilAlarmLabel)
@@ -70,7 +77,12 @@ extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let alarm = self.alarms[indexPath.row]
+        
+        let cell = AlarmTableViewCell(style: .default, reuseIdentifier: "Alarm")
+        cell.nameLabel.text = "name"
+        cell.userLabel.text = "user"
+        return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -79,5 +91,3 @@ extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
         header.textLabel?.textColor = UIColor(named: "header-text-color")
     }
 }
-
-
