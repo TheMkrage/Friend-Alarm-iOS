@@ -24,6 +24,8 @@ class MyAlarmViewController: UIViewController {
             print(familyName, fontNames)
         })
         
+        self.title = "My Alarm"
+        
         self.timeUntilAlarmLabel.font = UIFont(name: "DS-Digital", size: 64)
         self.timeUntilAlarmLabel.textColor = UIColor(named: "alarm-red")
         self.timeUntilAlarmLabel.text = "alarm off"
@@ -47,7 +49,7 @@ class MyAlarmViewController: UIViewController {
         self.timeUntilAlarmLabel.centerXAnchor == self.view.centerXAnchor
         
         self.untilItsTimeToWakeUpLabel.centerXAnchor == self.view.centerXAnchor
-        self.untilItsTimeToWakeUpLabel.topAnchor == self.timeUntilAlarmLabel.bottomAnchor + 20
+        self.untilItsTimeToWakeUpLabel.topAnchor == self.timeUntilAlarmLabel.bottomAnchor
         
         self.alarmTable.bottomAnchor == self.view.safeAreaLayoutGuide.bottomAnchor
         self.alarmTable.leadingAnchor == self.view.safeAreaLayoutGuide.leadingAnchor
