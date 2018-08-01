@@ -17,12 +17,10 @@ class MyAlarmViewController: UIViewController {
     
     var alarmTable = UITableView()
     
+    var alarms = [Alarm]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIFont.familyNames.forEach({ familyName in
-            let fontNames = UIFont.fontNames(forFamilyName: familyName)
-            print(familyName, fontNames)
-        })
         
         self.title = "My Alarm"
         
@@ -32,6 +30,10 @@ class MyAlarmViewController: UIViewController {
         
         self.untilItsTimeToWakeUpLabel.text = "until it's time to wake up"
         self.untilItsTimeToWakeUpLabel.textColor = UIColor(named: "alarm-red")
+        
+        self.alarmTable.delegate = self
+        self.alarmTable.dataSource = self
+        self.alarmTable.separatorStyle = .none
         
         self.view.addSubview(self.alarmSwitch)
         self.view.addSubview(self.timeUntilAlarmLabel)
@@ -54,6 +56,28 @@ class MyAlarmViewController: UIViewController {
         self.alarmTable.bottomAnchor == self.view.safeAreaLayoutGuide.bottomAnchor
         self.alarmTable.leadingAnchor == self.view.safeAreaLayoutGuide.leadingAnchor
         self.alarmTable.trailingAnchor == self.view.safeAreaLayoutGuide.trailingAnchor
-        self.alarmTable.topAnchor ==  self.untilItsTimeToWakeUpLabel.bottomAnchor + 20
+        self.alarmTable.topAnchor ==  self.untilItsTimeToWakeUpLabel.bottomAnchor + 40
     }
 }
+
+extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.alarms.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Alarms"
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor(named: "header-color")
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor(named: "header-text-color")
+    }
+}
+
+
