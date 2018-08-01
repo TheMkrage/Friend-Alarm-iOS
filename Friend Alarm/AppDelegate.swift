@@ -35,6 +35,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Appearance Editinngs
         UISwitch.appearance().onTintColor = UIColor(named: "alarm-red")
         UITableView.appearance().backgroundColor = .clear
+        
+        UINavigationBar.appearance().barTintColor = UIColor(named: "bar-color")
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 19)!, .foregroundColor: UIColor.white.cgColor]
+        
+        UITabBar.appearance().barTintColor = UIColor(named: "bar-color")
+        UITabBar.appearance().tintColor = .white
+        
+        UITableViewCell.appearance().backgroundColor = UIColor(named: "cell-color")
         return true
     }
 

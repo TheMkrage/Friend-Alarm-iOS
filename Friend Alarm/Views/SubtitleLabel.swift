@@ -21,7 +21,7 @@ class SubtitleLabel: UILabel {
     }
     
     func initialize() {
-        self.font = UIFont(name: "Helvetica-Medium", size: 17)
+        self.font = UIFont(name: "HelveticaNeue-Medium", size: 12)
         self.textColor = .white
     }
 }
