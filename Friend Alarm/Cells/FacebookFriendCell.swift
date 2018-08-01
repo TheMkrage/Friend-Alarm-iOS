@@ -7,18 +7,47 @@
 //
 
 import UIKit
+import Anchorage
 
 class FacebookFriendCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var profilePicImageView = UIImageView()
+    var nameLabel = TitleLabel()
+    var alarmIcon = UIImageView()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.initialize()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initialize()
+    }
+    
+    private func initialize() {
+        
+        self.alarmIcon.image = #imageLiteral(resourceName: "alarm-icon")
+        self.alarmIcon.isHidden = true
+        
+        self.selectionStyle = .none
+        
+        self.addSubview(self.profilePicImageView)
+        self.addSubview(self.nameLabel)
+        self.addSubview(self.alarmIcon)
+        
+        self.setupConstraints()
+    }
+    
+    func setupConstraints() {
+        self.profilePicImageView.centerYAnchor == self.centerYAnchor
+        self.profilePicImageView.leadingAnchor == self.leadingAnchor + 16
+        
+        self.nameLabel.centerYAnchor == self.centerYAnchor
+        self.nameLabel.leadingAnchor == self.profilePicImageView.trailingAnchor + 8
+        
+        self.alarmIcon.centerYAnchor == self.centerYAnchor
+        self.alarmIcon.trailingAnchor == self.trailingAnchor - 20
     }
 
 }

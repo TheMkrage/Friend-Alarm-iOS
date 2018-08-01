@@ -22,13 +22,6 @@ class FriendsViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Friends"
         
-        self.friends.append(User())
-        self.friends.append(User())
-        self.friends.append(User())
-        self.facebookFriends.append(FacebookUser())
-        self.facebookFriends.append(FacebookUser())
-        self.facebookFriends.append(FacebookUser())
-        
         self.searchBar.searchBarStyle = .default
         self.searchBar.changeSearchBarColor(color: UIColor.black)
         self.searchBar.barTintColor = UIColor.init(named: "bar-color")
@@ -72,9 +65,17 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            let friend = self.friends[indexPath.row]
+            
             let cell = FriendCell(style: .default, reuseIdentifier: "FriendCell")
+            cell.usernameLabel.text = friend.username
+            return cell
         } else if indexPath.section == 1 {
+            let facebookFriend = self.facebookFriends[indexPath.row]
+            
             let cell = FacebookFriendCell(style: .default, reuseIdentifier: "FacebookFriendCell")
+            cell.nameLabel.text = facebookFriend.name
+            return cell
         }
         return UITableViewCell()
     }

@@ -7,18 +7,41 @@
 //
 
 import UIKit
+import Anchorage
 
 class FriendCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    var usernameLabel = TitleLabel()
+    var alarmIcon = UIImageView()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.initialize()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initialize()
     }
-
+    
+    private func initialize() {
+        
+        self.alarmIcon.image = #imageLiteral(resourceName: "alarm-icon")
+        self.alarmIcon.isHidden = true
+        
+        self.selectionStyle = .none
+        
+        self.addSubview(self.usernameLabel)
+        self.addSubview(self.alarmIcon)
+        
+        self.setupConstraints()
+    }
+    
+    func setupConstraints() {
+        self.usernameLabel.centerYAnchor == self.centerYAnchor
+        self.usernameLabel.leadingAnchor == self.leadingAnchor + 16
+        
+        self.alarmIcon.centerYAnchor == self.centerYAnchor
+        self.alarmIcon.trailingAnchor == self.trailingAnchor - 20
+    }
 }
