@@ -8,6 +8,12 @@
 
 import UIKit
 
-class User: NSObject {
-
+class User: Codable {
+    var username: String
+    var facebookConnection: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case username = "username"
+        case facebookConnection = "facebook_connnection"
+    }
 }

@@ -8,6 +8,16 @@
 
 import UIKit
 
-class Alarm: NSObject {
-
+class Alarm: Codable {
+    var name: String
+    var duration: Double
+    var userId: Int
+    var fileURL: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case duration = "duration"
+        case userId = "user_id"
+        case fileURL = "file_url"
+    }
 }
