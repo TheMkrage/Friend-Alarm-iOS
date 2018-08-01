@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // ViewController and TabItem setup
         let myAlarmViewController = UINavigationController(rootViewController: MyAlarmViewController())
-        //let myOffersViewController = UINavigationController(rootViewController: ActiveOffersViewController())
+        let friendsViewController = UINavigationController(rootViewController: FriendsViewController())
         
         let tabViewController = UITabBarController()
-        tabViewController.setViewControllers([myAlarmViewController], animated: false)
+        tabViewController.setViewControllers([myAlarmViewController, friendsViewController], animated: false)
         tabViewController.selectedIndex = 0
         
         tabViewController.tabBar.items?[0].title = "My Alarm"
@@ -38,10 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barTintColor = UIColor(named: "bar-color")
         UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 19)!, .foregroundColor: UIColor.white]
         
         UITabBar.appearance().barTintColor = UIColor(named: "bar-color")
         UITabBar.appearance().tintColor = .white
+        UITabBar.appearance().isTranslucent = false 
+        
+        UISearchBar.appearance().barTintColor = .gray
         
         UITableViewCell.appearance().backgroundColor = UIColor(named: "cell-color")
         return true
