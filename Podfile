@@ -9,4 +9,6 @@ target 'Friend Alarm' do
 
   # Pods for Friend Alarm
   pod 'Anchorage'
+  pod 'Cache'
+  pod 'Alamofire'
 end

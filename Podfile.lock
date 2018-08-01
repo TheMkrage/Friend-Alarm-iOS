@@ -1,12 +1,18 @@
 PODS:
+  - Alamofire (4.7.2)
   - Anchorage (4.2.2)
+  - Cache (4.2.0)
 
 DEPENDENCIES:
+  - Alamofire
   - Anchorage
+  - Cache
 
 SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Anchorage: cba8707ea6475f604e04047882ba47c07e4b2ac1
+  Cache: f28f8dd64b632155aabf9b3906b036a659048251
 
-PODFILE CHECKSUM: 03a7610ce3f0deefd8b8aa3816a8a6cd5eab2fb5
+PODFILE CHECKSUM: da4a423ecb2e59de0c054fc1ab61823b450f6588
 
 COCOAPODS: 1.1.1

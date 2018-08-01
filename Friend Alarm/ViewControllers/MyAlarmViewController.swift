@@ -24,12 +24,6 @@ class MyAlarmViewController: UIViewController {
         
         self.title = "My Alarm"
         
-        self.alarms.append(Alarm())
-        self.alarms.append(Alarm())
-        self.alarms.append(Alarm())
-        self.alarms.append(Alarm())
-        self.alarms.append(Alarm())
-        
         self.timeUntilAlarmLabel.font = UIFont(name: "DS-Digital", size: 64)
         self.timeUntilAlarmLabel.textColor = UIColor(named: "alarm-red")
         self.timeUntilAlarmLabel.text = "alarm off"
