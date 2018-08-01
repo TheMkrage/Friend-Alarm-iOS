@@ -21,5 +21,6 @@ class SmallTextLabel: UILabel {
     
     func initialize() {
         self.font = UIFont(name: "Helvetica Neue-Thin", size: 12)
+        self.textColor = .white
     }
 }

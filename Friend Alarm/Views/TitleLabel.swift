@@ -21,6 +21,7 @@ class TitleLabel: UILabel {
     }
     
     func initialize() {
-        self.font = UIFont(name: "STHeiti", size: 17)
+        self.font = UIFont(name: "PingFangSC-Light", size: 17)
+        self.textColor = .white
     }
 }

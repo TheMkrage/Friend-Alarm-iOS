@@ -18,21 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         // ViewController and TabItem setup
-        let discoverViewController = UINavigationController(rootViewController: DiscoverViewController())
-        let myOffersViewController = UINavigationController(rootViewController: ActiveOffersViewController())
-        let profileViewController = UINavigationController(rootViewController: ProfileViewController())
+        let myAlarmViewController = UINavigationController(rootViewController: MyAlarmViewController())
+        //let myOffersViewController = UINavigationController(rootViewController: ActiveOffersViewController())
         
         let tabViewController = UITabBarController()
-        tabViewController.setViewControllers([discoverViewController, myOffersViewController, profileViewController], animated: false)
+        tabViewController.setViewControllers([myAlarmViewController], animated: false)
         tabViewController.selectedIndex = 0
         
-        tabViewController.tabBar.items?[0].title = "Discover"
-        tabViewController.tabBar.items?[1].title = "My Offers"
-        tabViewController.tabBar.items?[2].title = "Profile"
+        tabViewController.tabBar.items?[0].title = "My Alarm"
         
+        self.window?.backgroundColor = UIColor.init(named: "background-color")
         self.window?.rootViewController = tabViewController
         
         self.window?.makeKeyAndVisible()
+        
+        // Appearance Editinngs
+        UISwitch.appearance().onTintColor = UIColor(named: "alarm-red")
+        UITableView.appearance().backgroundColor = .clear
         return true
     }
 

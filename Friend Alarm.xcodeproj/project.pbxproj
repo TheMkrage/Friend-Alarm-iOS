@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E6D459421115721005E3D1A /* DS-DIGI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEB8210FAAC5005A8659 /* DS-DIGI.ttf */; };
+		7E6D459521115723005E3D1A /* PingFang-SC-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEBC210FB209005A8659 /* PingFang-SC-Light.ttf */; };
 		7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */; };
 		7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA8210FA44B005A8659 /* Assets.xcassets */; };
 		7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */; };
 		7EE8DEB4210FA990005A8659 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEB3210FA990005A8659 /* TitleLabel.swift */; };
-		7EE8DEB9210FAAC5005A8659 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEB8210FAAC5005A8659 /* DS-DIGI.TTF */; };
 		7EE8DEBF21110EAB005A8659 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */; };
 		7EE8DEC221110EFC005A8659 /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */; };
 		7EE8DEC421111C6D005A8659 /* SmallTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEC321111C6D005A8659 /* SmallTextLabel.swift */; };
@@ -27,7 +28,7 @@
 		7EE8DEAB210FA44B005A8659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EE8DEAD210FA44B005A8659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EE8DEB3210FA990005A8659 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
-		7EE8DEB8210FAAC5005A8659 /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
+		7EE8DEB8210FAAC5005A8659 /* DS-DIGI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.ttf"; sourceTree = "<group>"; };
 		7EE8DEBC210FB209005A8659 /* PingFang-SC-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PingFang-SC-Light.ttf"; sourceTree = "<group>"; };
 		7EE8DEBE21110EAB005A8659 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
 		7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +92,7 @@
 		7EE8DEB5210FAA7C005A8659 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
-				7EE8DEB8210FAAC5005A8659 /* DS-DIGI.TTF */,
+				7EE8DEB8210FAAC5005A8659 /* DS-DIGI.ttf */,
 				7EE8DEBC210FB209005A8659 /* PingFang-SC-Light.ttf */,
 			);
 			path = fonts;
@@ -185,9 +186,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E6D459421115721005E3D1A /* DS-DIGI.ttf in Resources */,
 				7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */,
 				7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */,
-				7EE8DEB9210FAAC5005A8659 /* DS-DIGI.TTF in Resources */,
+				7E6D459521115723005E3D1A /* PingFang-SC-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
