@@ -8,6 +8,7 @@
 
 import UIKit
 import Anchorage
+import Presentr
 
 class FriendsViewController: UIViewController {
     
@@ -32,6 +33,13 @@ class FriendsViewController: UIViewController {
         
         self.view.addSubview(self.searchBar)
         self.view.addSubview(self.friendsTable)
+        
+        if !UserStore.shared.hasRegisteredUsername() {
+            let vc = PickAUsernameViewController()
+            let presentr = Presentr(presentationType: .dynamic(center: .center))
+            presentr.keyboardTranslationType = .moveUp
+            self.customPresentViewController(presentr, viewController: vc, animated: true)
+        }
         
         self.setupConstraints()
     }

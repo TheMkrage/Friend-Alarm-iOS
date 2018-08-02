@@ -18,6 +18,7 @@
 		7E6D45A721118186005E3D1A /* FacebookFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45A621118186005E3D1A /* FacebookFriendCell.swift */; };
 		7E6D45AA2111872C005E3D1A /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45A92111872C005E3D1A /* UISearchBar+Extension.swift */; };
 		7E6D45AD21125F24005E3D1A /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45AC21125F24005E3D1A /* UserStore.swift */; };
+		7E6D45B021126A96005E3D1A /* PickAUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45AF21126A96005E3D1A /* PickAUsernameViewController.swift */; };
 		7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */; };
 		7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA8210FA44B005A8659 /* Assets.xcassets */; };
 		7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */; };
@@ -40,6 +41,7 @@
 		7E6D45A621118186005E3D1A /* FacebookFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookFriendCell.swift; sourceTree = "<group>"; };
 		7E6D45A92111872C005E3D1A /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		7E6D45AC21125F24005E3D1A /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
+		7E6D45AF21126A96005E3D1A /* PickAUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickAUsernameViewController.swift; sourceTree = "<group>"; };
 		7EE8DE9E210FA44B005A8659 /* Friend Alarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Friend Alarm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE8DEA8210FA44B005A8659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +113,14 @@
 			path = Store;
 			sourceTree = "<group>";
 		};
+		7E6D45AE21126A7B005E3D1A /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				7E6D45AF21126A96005E3D1A /* PickAUsernameViewController.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
 		7EE8DE95210FA44B005A8659 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +179,7 @@
 		7EE8DEC021110ED8005A8659 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7E6D45AE21126A7B005E3D1A /* Alerts */,
 				7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */,
 				7E6D459C21117819005E3D1A /* FriendsViewController.swift */,
 			);
@@ -312,6 +323,7 @@
 				7E6D459D21117819005E3D1A /* FriendsViewController.swift in Sources */,
 				7EE8DEC421111C6D005A8659 /* SmallTextLabel.swift in Sources */,
 				7EE8DEC221110EFC005A8659 /* MyAlarmViewController.swift in Sources */,
+				7E6D45B021126A96005E3D1A /* PickAUsernameViewController.swift in Sources */,
 				7EE8DEB4210FA990005A8659 /* TitleLabel.swift in Sources */,
 				7E6D45A321118105005E3D1A /* FacebookUser.swift in Sources */,
 				7EE8DEBF21110EAB005A8659 /* SubtitleLabel.swift in Sources */,

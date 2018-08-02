@@ -11,4 +11,5 @@ target 'Friend Alarm' do
   pod 'Anchorage'
   pod 'Cache'
   pod 'Alamofire'
+  pod 'Presentr'
 end
