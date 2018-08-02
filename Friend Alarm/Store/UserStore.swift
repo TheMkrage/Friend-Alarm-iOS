@@ -8,6 +8,7 @@
 
 import UIKit
 import Cache
+import Alamofire
 
 class UserStore: NSObject {
     static var shared = UserStore()
@@ -26,8 +27,25 @@ class UserStore: NSObject {
         return try? storage.object(ofType: User.self, forKey: "user")
     }
     
-    func create(username: String, callback: ((User) -> Void)?) {
+    func create(username: String, callback: ((User?) -> Void)?) {
+        var dictionary = Dictionary<String, Any>()
+        dictionary["username"] = username
         
+        Alamofire.request("\(Backend.baseURL)/users", method: .post, parameters: dictionary, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response) in
+            let jsonDecoder = JSONDecoder()
+            guard let data = response.data else {
+                return
+            }
+            do {
+                let user = try jsonDecoder.decode(User.self, from: data)
+                callback?(user)
+                try? self.storage.setObject(user, forKey: "user")
+            } catch let error {
+                callback?(nil)
+                print(error)
+                print(response.value)
+            }
+        }
     }
     
     func connect(toFacebook connection: String, callback: ((User) -> Void)?) {

@@ -52,7 +52,18 @@ class PickAUsernameViewController: UIViewController {
     }
     
     @objc func submit() {
-        
+        guard let username = self.usernameTextField.text else {
+            self.usernameTextField.layer.borderColor = UIColor(named: "alarm-red")?.cgColor
+            self.usernameTextField.layer.borderWidth = 1.0
+            return
+        }
+        UserStore.shared.create(username: username) { (user) in
+            guard user != nil else {
+                self.alert(title: "Username is already taken", message: "Try another one!")
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func setupConstraints() {
