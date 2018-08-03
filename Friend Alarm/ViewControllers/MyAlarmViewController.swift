@@ -15,6 +15,8 @@ class MyAlarmViewController: UIViewController {
     var timeUntilAlarmLabel = UILabel()
     var untilItsTimeToWakeUpLabel = SmallTextLabel()
     
+    let alarmScheduler = AlarmScheduler()
+    
     var alarmTable = UITableView()
     
     var alarms = [Alarm]()

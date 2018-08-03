@@ -35,6 +35,7 @@ class PickAUsernameViewController: UIViewController {
         self.usernameTextField.tintColor = UIColor(named: "tint-color")
         self.usernameTextField.font = UIFont.init(name: "HelveticaNeue-Medium", size: 11.0)
         self.usernameTextField.layer.cornerRadius = 5
+        self.usernameTextField.addTarget(self, action: #selector(makeLowercase(sender:)), for: .editingChanged)
         
         self.submitButton.backgroundColor = UIColor(named: "button-color")
         self.submitButton.setTitle("Submit", for: .normal)
@@ -64,6 +65,10 @@ class PickAUsernameViewController: UIViewController {
             }
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    @objc func makeLowercase(sender: UITextField) {
+        sender.text = sender.text?.lowercased()
     }
     
     func setupConstraints() {
