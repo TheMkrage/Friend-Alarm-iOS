@@ -51,4 +51,21 @@ class UserStore: NSObject {
     func connect(toFacebook connection: String, callback: ((User) -> Void)?) {
         
     }
+    
+    func search(query: String, callback: (([User]?) -> Void)?) {
+        Alamofire.request("\(Backend.baseURL)/search?query=\(query)", method: .get, parameters: nil, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response) in
+            let jsonDecoder = JSONDecoder()
+            guard let data = response.data else {
+                return
+            }
+            do {
+                let users = try jsonDecoder.decode([User].self, from: data)
+                callback?(users)
+            } catch let error {
+                callback?(nil)
+                print(error)
+                print(response.value)
+            }
+        }
+    }
 }

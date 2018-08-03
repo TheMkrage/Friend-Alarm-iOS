@@ -26,6 +26,7 @@ class FriendsViewController: UIViewController {
         self.searchBar.searchBarStyle = .default
         self.searchBar.changeSearchBarColor(color: UIColor.black)
         self.searchBar.barTintColor = UIColor.init(named: "bar-color")
+        self.searchBar.delegate = self
         
         self.friendsTable.delegate = self
         self.friendsTable.dataSource = self
@@ -102,5 +103,18 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         view.tintColor = UIColor(named: "header-color")
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor(named: "header-text-color")
+    }
+}
+
+extension FriendsViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        UserStore.shared.search(query: searchText) { (users) in
+            print(users)
+            print("bleh")
+            for user in users! {
+                print(user)
+                print(user.username)
+            }
+        }
     }
 }
