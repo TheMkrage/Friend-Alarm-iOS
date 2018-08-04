@@ -123,8 +123,8 @@
 		7E6D45AB21125EA1005E3D1A /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				7E6D45AC21125F24005E3D1A /* UserStore.swift */,
 				7E6D45B321139588005E3D1A /* Backend.swift */,
+				7E6D45AC21125F24005E3D1A /* UserStore.swift */,
 				7E6D462521157C60005E3D1A /* FriendStore.swift */,
 			);
 			path = Store;

@@ -8,11 +8,19 @@
 
 import UIKit
 
-class User: Codable {
+class User: Codable, Hashable {
+    lazy var hashValue = self.id
+    
+    static func ==(lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    var id: Int
     var username: String
     var facebookConnection: String?
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
         case username = "username"
         case facebookConnection = "facebook_connnection"
     }

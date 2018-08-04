@@ -21,14 +21,22 @@ class SearchResultsTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let user = self.searchResults[indexPath.row]
         let cell = AddFriendCell(style: .default, reuseIdentifier: "AddFriend")
-        cell.usernameLabel.text = self.searchResults[indexPath.row].username
+        if FriendStore.shared.isFriend(user: user) {
+            cell.addFriendButton.setTitle("-", for: .normal)
+        } else {
+            cell.addFriendButton.setTitle("+", for: .normal)
+        }
+        cell.usernameLabel.text = user.username
         cell.addFriendButton.tag = indexPath.row
         cell.addFriendButton.addTarget(self, action: #selector(toggleFriend(sender:)), for: .touchUpInside)
         return cell
     }
     
     @objc func toggleFriend(sender: UIButton) {
+        let user = self.searchResults[sender.tag]
+        FriendStore.shared.toggleFriend(user: user)
         
     }
 }

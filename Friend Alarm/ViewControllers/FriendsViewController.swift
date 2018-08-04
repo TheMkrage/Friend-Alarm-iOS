@@ -24,6 +24,7 @@ class FriendsViewController: UIViewController {
             if isSearching {
                 self.friendsTable.dataSource = self.searchResultsDataSource
             } else {
+                self.friends = FriendStore.shared.getFriends()
                 self.friendsTable.dataSource = self
             }
         }
@@ -39,10 +40,13 @@ class FriendsViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Friends"
         
+        self.friends = FriendStore.shared.getFriends()
+        
         self.searchBar.searchBarStyle = .default
         self.searchBar.changeSearchBarColor(color: UIColor.black)
         self.searchBar.barTintColor = UIColor.init(named: "bar-color")
         self.searchBar.delegate = self
+        self.searchBar.showsCancelButton = true
         
         self.friendsTable.delegate = self
         self.friendsTable.dataSource = self

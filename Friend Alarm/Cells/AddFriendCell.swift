@@ -26,6 +26,10 @@ class AddFriendCell: UITableViewCell {
     
     private func initialize() {
         self.addFriendButton.setTitle("+", for: .normal)
+        
+        self.addSubview(self.usernameLabel)
+        self.addSubview(self.addFriendButton)
+        
         self.setupConstraints()
     }
     
