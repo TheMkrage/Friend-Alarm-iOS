@@ -18,7 +18,23 @@ class FriendsViewController: UIViewController {
     
     var friends = [User]()
     var facebookFriends = [FacebookUser]()
-
+    
+    var isSearching = false {
+        didSet {
+            if isSearching {
+                self.friendsTable.dataSource = self.searchResultsDataSource
+            } else {
+                self.friendsTable.dataSource = self
+            }
+        }
+    }
+    var searchResultsDataSource = SearchResultsTableViewDataSource(searchResults: [])
+    var searchResults = [User]() {
+        didSet {
+            self.searchResultsDataSource.searchResults = self.searchResults
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Friends"
@@ -109,12 +125,19 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
 extension FriendsViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         UserStore.shared.search(query: searchText) { (users) in
-            print(users)
-            print("bleh")
-            for user in users! {
-                print(user)
-                print(user.username)
+            guard let users = users else {
+                return
             }
+            self.searchResults = users
+            self.friendsTable.reloadData()
         }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.isSearching = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.isSearching = false
     }
 }
