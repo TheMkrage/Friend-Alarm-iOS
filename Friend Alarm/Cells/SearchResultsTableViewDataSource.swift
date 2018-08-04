@@ -21,9 +21,14 @@ class SearchResultsTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = self.searchResults[indexPath.row].username
-        cell.backgroundColor = .blue
+        let cell = AddFriendCell(style: .default, reuseIdentifier: "AddFriend")
+        cell.usernameLabel.text = self.searchResults[indexPath.row].username
+        cell.addFriendButton.tag = indexPath.row
+        cell.addFriendButton.addTarget(self, action: #selector(toggleFriend(sender:)), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func toggleFriend(sender: UIButton) {
+        
     }
 }

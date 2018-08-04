@@ -23,6 +23,8 @@
 		7E6D45B421139588005E3D1A /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45B321139588005E3D1A /* Backend.swift */; };
 		7E6D45B62114DEA0005E3D1A /* AlarmScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45B52114DEA0005E3D1A /* AlarmScheduler.swift */; };
 		7E6D45DE21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45DD21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift */; };
+		7E6D45E02115752C005E3D1A /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45DF2115752C005E3D1A /* AddFriendCell.swift */; };
+		7E6D462621157C60005E3D1A /* FriendStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D462521157C60005E3D1A /* FriendStore.swift */; };
 		7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */; };
 		7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA8210FA44B005A8659 /* Assets.xcassets */; };
 		7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */; };
@@ -50,6 +52,8 @@
 		7E6D45B321139588005E3D1A /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		7E6D45B52114DEA0005E3D1A /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmScheduler.swift; sourceTree = "<group>"; };
 		7E6D45DD21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewDataSource.swift; sourceTree = "<group>"; };
+		7E6D45DF2115752C005E3D1A /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
+		7E6D462521157C60005E3D1A /* FriendStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStore.swift; sourceTree = "<group>"; };
 		7EE8DE9E210FA44B005A8659 /* Friend Alarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Friend Alarm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE8DEA8210FA44B005A8659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 				7E6D459A21116C54005E3D1A /* AlarmTableViewCell.swift */,
 				7E6D45A421118172005E3D1A /* FriendCell.swift */,
 				7E6D45A621118186005E3D1A /* FacebookFriendCell.swift */,
+				7E6D45DF2115752C005E3D1A /* AddFriendCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			children = (
 				7E6D45AC21125F24005E3D1A /* UserStore.swift */,
 				7E6D45B321139588005E3D1A /* Backend.swift */,
+				7E6D462521157C60005E3D1A /* FriendStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				7E6D45B021126A96005E3D1A /* PickAUsernameViewController.swift in Sources */,
 				7EE8DEB4210FA990005A8659 /* TitleLabel.swift in Sources */,
 				7E6D45A321118105005E3D1A /* FacebookUser.swift in Sources */,
+				7E6D45E02115752C005E3D1A /* AddFriendCell.swift in Sources */,
 				7EE8DEBF21110EAB005A8659 /* SubtitleLabel.swift in Sources */,
 				7E6D45AD21125F24005E3D1A /* UserStore.swift in Sources */,
 				7E6D45AA2111872C005E3D1A /* UISearchBar+Extension.swift in Sources */,
@@ -348,6 +355,7 @@
 				7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */,
 				7E6D45B62114DEA0005E3D1A /* AlarmScheduler.swift in Sources */,
 				7E6D459B21116C54005E3D1A /* AlarmTableViewCell.swift in Sources */,
+				7E6D462621157C60005E3D1A /* FriendStore.swift in Sources */,
 				7E6D459821116121005E3D1A /* Alarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
