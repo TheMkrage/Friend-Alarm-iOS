@@ -66,7 +66,8 @@ class MyAlarmViewController: UIViewController {
     
     @objc func addAlarm() {
         let vc = AddAlarmViewController()
-        self.present(vc, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true, completion: nil)
     }
 }
 

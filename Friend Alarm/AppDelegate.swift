@@ -46,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITextField.appearance().textColor = UIColor(named: "tint-color")
         UITextField.appearance().tintColor = UIColor(named: "tint-color")
         UITextField.appearance().font = UIFont.init(name: "HelveticaNeue-Medium", size: 11.0)
-        UITextField.appearance().layer.cornerRadius = 5
         UITextField.appearance().borderStyle = .none
         
         UITabBar.appearance().barTintColor = UIColor(named: "bar-color")

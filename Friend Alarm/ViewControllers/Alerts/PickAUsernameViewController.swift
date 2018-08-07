@@ -29,6 +29,7 @@ class PickAUsernameViewController: UIViewController {
         
         self.usernameTextField.placeholder = "Username"
         self.usernameTextField.addTarget(self, action: #selector(makeLowercase(sender:)), for: .editingChanged)
+        self.usernameTextField.layer.cornerRadius = 5
         
         self.submitButton.backgroundColor = UIColor(named: "button-color")
         self.submitButton.setTitle("Submit", for: .normal)
