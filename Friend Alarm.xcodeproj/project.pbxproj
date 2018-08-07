@@ -25,6 +25,7 @@
 		7E6D45DE21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45DD21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift */; };
 		7E6D45E02115752C005E3D1A /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45DF2115752C005E3D1A /* AddFriendCell.swift */; };
 		7E6D462621157C60005E3D1A /* FriendStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D462521157C60005E3D1A /* FriendStore.swift */; };
+		7E6D46282119689D005E3D1A /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D46272119689D005E3D1A /* AddAlarmViewController.swift */; };
 		7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */; };
 		7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEA8210FA44B005A8659 /* Assets.xcassets */; };
 		7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */; };
@@ -54,6 +55,7 @@
 		7E6D45DD21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewDataSource.swift; sourceTree = "<group>"; };
 		7E6D45DF2115752C005E3D1A /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
 		7E6D462521157C60005E3D1A /* FriendStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStore.swift; sourceTree = "<group>"; };
+		7E6D46272119689D005E3D1A /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		7EE8DE9E210FA44B005A8659 /* Friend Alarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Friend Alarm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE8DEA8210FA44B005A8659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				7E6D45AE21126A7B005E3D1A /* Alerts */,
 				7EE8DEC121110EFC005A8659 /* MyAlarmViewController.swift */,
 				7E6D459C21117819005E3D1A /* FriendsViewController.swift */,
+				7E6D46272119689D005E3D1A /* AddAlarmViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			files = (
 				7E6D45B2211392F4005E3D1A /* UIViewController+Extension.swift in Sources */,
 				7E6D45A521118172005E3D1A /* FriendCell.swift in Sources */,
+				7E6D46282119689D005E3D1A /* AddAlarmViewController.swift in Sources */,
 				7E6D45A721118186005E3D1A /* FacebookFriendCell.swift in Sources */,
 				7E6D459D21117819005E3D1A /* FriendsViewController.swift in Sources */,
 				7E6D45B421139588005E3D1A /* Backend.swift in Sources */,

@@ -38,6 +38,8 @@ class MyAlarmViewController: UIViewController {
         self.alarmTable.separatorStyle = .none
         self.alarmTable.rowHeight = 70
         
+        self.navigationItem.setRightBarButton(UIBarButtonItem.init(title: "+", style: .plain, target: self, action: #selector(addAlarm)), animated: true)
+        
         self.view.addSubview(self.alarmSwitch)
         self.view.addSubview(self.timeUntilAlarmLabel)
         self.view.addSubview(self.untilItsTimeToWakeUpLabel)
@@ -60,6 +62,11 @@ class MyAlarmViewController: UIViewController {
         self.alarmTable.leadingAnchor == self.view.safeAreaLayoutGuide.leadingAnchor
         self.alarmTable.trailingAnchor == self.view.safeAreaLayoutGuide.trailingAnchor
         self.alarmTable.topAnchor ==  self.untilItsTimeToWakeUpLabel.bottomAnchor + 40
+    }
+    
+    @objc func addAlarm() {
+        let vc = AddAlarmViewController()
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
