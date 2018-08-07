@@ -41,6 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 19)!, .foregroundColor: UIColor.white]
         
+        UITextField.appearance().backgroundColor = UIColor(named: "cell-color")
+        UITextField.appearance().textAlignment = .center
+        UITextField.appearance().textColor = UIColor(named: "tint-color")
+        UITextField.appearance().tintColor = UIColor(named: "tint-color")
+        UITextField.appearance().font = UIFont.init(name: "HelveticaNeue-Medium", size: 11.0)
+        UITextField.appearance().layer.cornerRadius = 5
+        UITextField.appearance().borderStyle = .none
+        
         UITabBar.appearance().barTintColor = UIColor(named: "bar-color")
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().isTranslucent = false 

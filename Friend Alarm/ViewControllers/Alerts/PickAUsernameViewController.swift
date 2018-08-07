@@ -27,14 +27,7 @@ class PickAUsernameViewController: UIViewController {
         self.infoLabel.text = "Select a username so that your friends can find you!"
         self.infoLabel.textAlignment = .center
         
-        self.usernameTextField.borderStyle = .none
-        self.usernameTextField.backgroundColor = UIColor(named: "cell-color")
         self.usernameTextField.placeholder = "Username"
-        self.usernameTextField.textAlignment = .center
-        self.usernameTextField.textColor = UIColor(named: "tint-color")
-        self.usernameTextField.tintColor = UIColor(named: "tint-color")
-        self.usernameTextField.font = UIFont.init(name: "HelveticaNeue-Medium", size: 11.0)
-        self.usernameTextField.layer.cornerRadius = 5
         self.usernameTextField.addTarget(self, action: #selector(makeLowercase(sender:)), for: .editingChanged)
         
         self.submitButton.backgroundColor = UIColor(named: "button-color")
