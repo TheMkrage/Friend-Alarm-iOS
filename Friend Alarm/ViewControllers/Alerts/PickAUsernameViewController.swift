@@ -82,6 +82,5 @@ class PickAUsernameViewController: UIViewController {
         self.submitButton.widthAnchor == 115
         self.submitButton.centerXAnchor == self.view.centerXAnchor
         self.submitButton.bottomAnchor == self.view.bottomAnchor - 20
-        
     }
 }

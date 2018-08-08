@@ -24,7 +24,10 @@ class AddAlarmViewController: UIViewController {
     var alarmLabel = TitleLabel()
     var alarmDescriptionLabel = SmallTextLabel()
     
-    var recordButton = UIButton()
+    var recordButtonView = UIView()
+    var recordButtonLabel = UILabel()
+    var recordButtonImage = UIImageView()
+    
     var musicButton = UIButton()
     
     var repeatLabel = TitleLabel()
@@ -39,6 +42,9 @@ class AddAlarmViewController: UIViewController {
     
     var createButton = UIButton()
     
+    // makes sure playback plays the audio as many times as deemed necssary by the stepper
+    var timesPlayed = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(named: "background-color")
@@ -50,10 +56,13 @@ class AddAlarmViewController: UIViewController {
         self.alarmLabel.text = "Alarm"
         self.alarmDescriptionLabel.text = "Make sure it could wake somebody up!"
         
-        self.recordButton.backgroundColor = UIColor.init(named: "button-text-color")
-        self.recordButton.setTitleColor(UIColor.init(named: "tint-color"), for: .normal)
-        self.recordButton.setTitle("Record", for: .normal)
-        self.recordButton.addTarget(self, action: #selector(countdownAndRecord), for: .touchUpInside)
+        self.recordButtonView.backgroundColor = UIColor.init(named: "button-text-color")
+        self.recordButtonLabel.textColor = UIColor.init(named: "tint-color")
+        self.recordButtonLabel.text = "Record"
+        self.recordButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(countdownAndRecord)))
+        
+        self.recordButtonView.addSubview(self.recordButtonLabel)
+        self.recordButtonView.addSubview(self.recordButtonImage)
         
         self.musicButton.backgroundColor = UIColor.init(named: "button-text-color")
         self.musicButton.setTitleColor(UIColor.init(named: "tint-color"), for: .normal)
@@ -65,7 +74,10 @@ class AddAlarmViewController: UIViewController {
         self.repeatNumberLabel.text = "\(1)"
         self.repeatNumberLabel.font = UIFont(name: self.repeatNumberLabel.font.fontName, size: 24.0)
         self.repeatStackView.spacing = 6
+        self.repeatStepper.value = 1
+        self.repeatStepper.minimumValue = 1
         self.repeatStepper.tintColor = UIColor.init(named: "dark-mode-orange")
+        self.repeatStepper.addTarget(self, action: #selector(stepperChanged(sender:)), for: .valueChanged)
         
         self.previewLabel.text = "Preview"
         self.previewPlayButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
@@ -81,7 +93,7 @@ class AddAlarmViewController: UIViewController {
         self.view.addSubview(self.nameField)
         self.view.addSubview(self.alarmLabel)
         self.view.addSubview(self.alarmDescriptionLabel)
-        self.view.addSubview(self.recordButton)
+        self.view.addSubview(self.recordButtonView)
         self.view.addSubview(self.musicButton)
         self.view.addSubview(self.repeatLabel)
         self.view.addSubview(self.repeatStepper)
@@ -110,6 +122,12 @@ class AddAlarmViewController: UIViewController {
         self.setupConstraints()
     }
     
+    @objc func stepperChanged(sender: UIStepper) {
+        self.repeatNumberLabel.text = "\(Int(sender.value))"
+    }
+    
+    
+    // MARK: - Audio Recording
     @objc func countdownAndRecord() {
         if audioRecorder == nil {
             startRecording()
@@ -118,13 +136,26 @@ class AddAlarmViewController: UIViewController {
         }
     }
     
+    // returns nil if have no recorded yet
+    func getRecordedLength() -> Int? {
+        let audioAsset = AVURLAsset.init(url: self.getAudioFileURL(), options: nil)
+        let duration = audioAsset.duration
+        print("dur \(duration)")
+        print("dur2 \(CMTimeGetSeconds(duration))")
+        return Int(CMTimeGetSeconds(duration))
+    }
+    
+    private func getAudioFileURL() -> URL {
+        return getDocumentsDirectory().appendingPathComponent("recording.m4a")
+    }
+    
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
     
     func startRecording() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        let audioFilename = self.getAudioFileURL()
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -138,7 +169,7 @@ class AddAlarmViewController: UIViewController {
             audioRecorder.delegate = self
             audioRecorder.record()
             
-            recordButton.setTitle("Tap to Stop", for: .normal)
+            self.recordButtonLabel.text = "Tap to Stop"
         } catch {
             finishRecording(success: false)
         }
@@ -149,27 +180,30 @@ class AddAlarmViewController: UIViewController {
         audioRecorder = nil
         
         if success {
-            recordButton.setTitle("Tap to Re-record", for: .normal)
+            self.recordButtonLabel.text = "Tap to Re-record"
         } else {
-            recordButton.setTitle("Tap to Record", for: .normal)
+            self.recordButtonLabel.text = "Tap to Record"
             // recording failed :(
         }
     }
     
     @objc func playRecordedAudio() {
+        // just stop playing if already playing
+        if player?.isPlaying ?? false {
+            player?.stop()
+            self.previewPlayButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+            return
+        }
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
             
-            player = try AVAudioPlayer(contentsOf: getDocumentsDirectory().appendingPathComponent("recording.m4a"), fileTypeHint: AVFileType.mp3.rawValue)
-            
-            /* iOS 10 and earlier require the following line:
-             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
-            
+            player = try AVAudioPlayer(contentsOf: self.getAudioFileURL(), fileTypeHint: AVFileType.mp3.rawValue)
+            player?.delegate = self
             guard let player = player else { return }
             
             player.play()
-            
+            self.previewPlayButton.setImage(#imageLiteral(resourceName: "stop-icon"), for: .normal)
         } catch let error {
             print(error.localizedDescription)
         }
@@ -193,12 +227,16 @@ class AddAlarmViewController: UIViewController {
         self.musicButton.leadingAnchor == self.view.leadingAnchor + 20
         self.musicButton.topAnchor == self.alarmDescriptionLabel.bottomAnchor + 16
         self.musicButton.widthAnchor == self.musicButton.heightAnchor
-        self.musicButton.trailingAnchor == self.recordButton.leadingAnchor - 40
+        self.musicButton.trailingAnchor == self.recordButtonView.leadingAnchor - 40
         
-        self.recordButton.topAnchor == self.alarmDescriptionLabel.bottomAnchor + 16
-        self.recordButton.trailingAnchor == self.view.trailingAnchor - 20
-        self.recordButton.widthAnchor == self.recordButton.heightAnchor
-        self.recordButton.widthAnchor == self.musicButton.widthAnchor
+        self.recordButtonView.topAnchor == self.alarmDescriptionLabel.bottomAnchor + 16
+        self.recordButtonView.trailingAnchor == self.view.trailingAnchor - 20
+        self.recordButtonView.widthAnchor == self.recordButtonView.heightAnchor
+        self.recordButtonView.widthAnchor == self.musicButton.widthAnchor
+        
+        self.recordButtonImage.centerAnchors == self.recordButtonView.centerAnchors
+        self.recordButtonLabel.bottomAnchor == self.recordButtonView.bottomAnchor - 15
+        self.recordButtonLabel.centerXAnchor == self.recordButtonView.centerXAnchor
         
         self.repeatLabel.centerXAnchor == self.musicButton.centerXAnchor
         self.repeatLabel.topAnchor == self.musicButton.bottomAnchor + 28
@@ -209,8 +247,8 @@ class AddAlarmViewController: UIViewController {
         self.repeatStackView.topAnchor == self.repeatStepper.bottomAnchor + 11
         self.repeatStackView.centerXAnchor == self.repeatStepper.centerXAnchor
         
-        self.previewLabel.topAnchor == self.recordButton.bottomAnchor + 28
-        self.previewLabel.centerXAnchor == self.recordButton.centerXAnchor
+        self.previewLabel.topAnchor == self.recordButtonView.bottomAnchor + 28
+        self.previewLabel.centerXAnchor == self.recordButtonView.centerXAnchor
         
         self.previewPlayButton.centerYAnchor == self.repeatStepper.centerYAnchor
         self.previewPlayButton.centerXAnchor == self.previewLabel.centerXAnchor
@@ -226,6 +264,17 @@ extension AddAlarmViewController: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
             finishRecording(success: false)
+        }
+    }
+}
+
+extension AddAlarmViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        self.timesPlayed = self.timesPlayed + 1
+        if self.timesPlayed < Int(self.repeatStepper.value) {
+            self.playRecordedAudio()
+        } else {
+            self.previewPlayButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
         }
     }
 }
