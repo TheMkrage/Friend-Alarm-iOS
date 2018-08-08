@@ -8,9 +8,16 @@
 
 import UIKit
 import Anchorage
+import AVFoundation
 
 class AddAlarmViewController: UIViewController {
 
+    // Recording
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
+    var player: AVAudioPlayer?
+    
+    // View
     var nameLabel = TitleLabel()
     var nameField = UITextField()
     
@@ -43,8 +50,14 @@ class AddAlarmViewController: UIViewController {
         self.alarmLabel.text = "Alarm"
         self.alarmDescriptionLabel.text = "Make sure it could wake somebody up!"
         
-        self.recordButton.backgroundColor = UIColor.white
-        self.musicButton.backgroundColor = UIColor.white
+        self.recordButton.backgroundColor = UIColor.init(named: "button-text-color")
+        self.recordButton.setTitleColor(UIColor.init(named: "tint-color"), for: .normal)
+        self.recordButton.setTitle("Record", for: .normal)
+        self.recordButton.addTarget(self, action: #selector(countdownAndRecord), for: .touchUpInside)
+        
+        self.musicButton.backgroundColor = UIColor.init(named: "button-text-color")
+        self.musicButton.setTitleColor(UIColor.init(named: "tint-color"), for: .normal)
+        self.musicButton.setTitle("Music", for: .normal)
         
         self.repeatLabel.text = "Repeat"
         self.repeatTimesLabel.font = UIFont(name: self.repeatTimesLabel.font.fontName, size: 11.0)
@@ -56,6 +69,7 @@ class AddAlarmViewController: UIViewController {
         
         self.previewLabel.text = "Preview"
         self.previewPlayButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+        self.previewPlayButton.addTarget(self, action: #selector(playRecordedAudio), for: .touchUpInside)
         
         self.createButton.backgroundColor = UIColor(named: "button-color")
         self.createButton.setTitle("Create", for: .normal)
@@ -76,7 +90,89 @@ class AddAlarmViewController: UIViewController {
         self.view.addSubview(self.previewPlayButton)
         self.view.addSubview(self.createButton)
         
+        // Recording Setup
+        self.recordingSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try self.recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try self.recordingSession.setActive(true)
+            self.recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if !allowed {
+                        
+                    }
+                }
+            }
+        } catch {
+            // failed to record!
+        }
+        
         self.setupConstraints()
+    }
+    
+    @objc func countdownAndRecord() {
+        if audioRecorder == nil {
+            startRecording()
+        } else {
+            finishRecording(success: true)
+        }
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func startRecording() {
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+        
+        do {
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
+            
+            recordButton.setTitle("Tap to Stop", for: .normal)
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+    
+    func finishRecording(success: Bool) {
+        audioRecorder.stop()
+        audioRecorder = nil
+        
+        if success {
+            recordButton.setTitle("Tap to Re-record", for: .normal)
+        } else {
+            recordButton.setTitle("Tap to Record", for: .normal)
+            // recording failed :(
+        }
+    }
+    
+    @objc func playRecordedAudio() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            player = try AVAudioPlayer(contentsOf: getDocumentsDirectory().appendingPathComponent("recording.m4a"), fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     func setupConstraints() {
@@ -123,5 +219,13 @@ class AddAlarmViewController: UIViewController {
         self.createButton.centerXAnchor == self.view.centerXAnchor
         self.createButton.widthAnchor == 190
         self.createButton.heightAnchor == 35
+    }
+}
+
+extension AddAlarmViewController: AVAudioRecorderDelegate {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
     }
 }

@@ -37,6 +37,5 @@ class SearchResultsTableViewDataSource: NSObject, UITableViewDataSource {
     @objc func toggleFriend(sender: UIButton) {
         let user = self.searchResults[sender.tag]
         FriendStore.shared.toggleFriend(user: user)
-        
     }
 }
