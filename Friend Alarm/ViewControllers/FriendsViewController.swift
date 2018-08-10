@@ -30,7 +30,7 @@ class FriendsViewController: UIViewController {
             self.friendsTable.reloadData()
         }
     }
-    var searchResultsDataSource = SearchResultsTableViewDataSource(searchResults: [])
+    lazy var searchResultsDataSource = SearchResultsTableViewDataSource(searchResults: [], table: self.friendsTable)
     var searchResults = [User]() {
         didSet {
             self.searchResultsDataSource.searchResults = self.searchResults

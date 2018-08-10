@@ -11,9 +11,11 @@ import UIKit
 class SearchResultsTableViewDataSource: NSObject, UITableViewDataSource {
     
     var searchResults = [User]()
+    var table: UITableView!
     
-    init(searchResults: [User]) {
+    init(searchResults: [User], table: UITableView) {
         self.searchResults = searchResults
+        self.table = table
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,5 +39,6 @@ class SearchResultsTableViewDataSource: NSObject, UITableViewDataSource {
     @objc func toggleFriend(sender: UIButton) {
         let user = self.searchResults[sender.tag]
         FriendStore.shared.toggleFriend(user: user)
+        self.table.reloadData()
     }
 }
