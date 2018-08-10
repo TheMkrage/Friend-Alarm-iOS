@@ -27,6 +27,7 @@ class FriendsViewController: UIViewController {
                 self.friends = FriendStore.shared.getFriends()
                 self.friendsTable.dataSource = self
             }
+            self.friendsTable.reloadData()
         }
     }
     var searchResultsDataSource = SearchResultsTableViewDataSource(searchResults: [])
@@ -47,6 +48,8 @@ class FriendsViewController: UIViewController {
         self.searchBar.barTintColor = UIColor.init(named: "bar-color")
         self.searchBar.delegate = self
         self.searchBar.showsCancelButton = true
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.init(named: "tint-color")
         
         self.friendsTable.delegate = self
         self.friendsTable.dataSource = self
@@ -143,5 +146,11 @@ extension FriendsViewController: UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.isSearching = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        self.isSearching = false
+        searchBar.resignFirstResponder()
     }
 }

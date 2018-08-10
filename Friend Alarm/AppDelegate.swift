@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITextField.appearance().font = UIFont.init(name: "HelveticaNeue-Medium", size: 11.0)
         UITextField.appearance().borderStyle = .none
         
+        UISearchBar.appearance().tintColor = UIColor(named: "tint-color")
+        UISearchBar.appearance().backgroundColor = UIColor(named: "cell-color")
+        
         UITabBar.appearance().barTintColor = UIColor(named: "bar-color")
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().isTranslucent = false 

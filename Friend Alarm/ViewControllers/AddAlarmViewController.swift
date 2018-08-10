@@ -183,7 +183,6 @@ class AddAlarmViewController: UIViewController {
             self.recordButtonLabel.text = "Tap to Re-record"
         } else {
             self.recordButtonLabel.text = "Tap to Record"
-            // recording failed :(
         }
     }
     
