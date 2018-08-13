@@ -88,6 +88,7 @@ class AddAlarmViewController: UIViewController {
         self.createButton.setTitleColor(UIColor(named: "button-text-color"), for: .normal)
         self.createButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 16.0)
         self.createButton.layer.cornerRadius = 17.5
+        self.createButton.addTarget(self, action: #selector(create), for: .touchUpInside)
         
         self.view.addSubview(self.nameLabel)
         self.view.addSubview(self.nameField)
@@ -122,10 +123,20 @@ class AddAlarmViewController: UIViewController {
         self.setupConstraints()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @objc func stepperChanged(sender: UIStepper) {
         self.repeatNumberLabel.text = "\(Int(sender.value))"
     }
     
+    @objc func create() {
+        let data = try? Data(contentsOf: getDocumentsDirectory().appendingPathComponent("recording.m4a"))
+        print(data)
+        print(" ")
+        AlarmStore.shared.create(audioData: data, name: self.nameField.text!, duration: 1)
+    }
     
     // MARK: - Audio Recording
     @objc func countdownAndRecord() {
@@ -159,9 +170,9 @@ class AddAlarmViewController: UIViewController {
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            AVSampleRateKey:44100,
+            AVNumberOfChannelsKey:2,
+            AVEncoderAudioQualityKey:AVAudioQuality.max.rawValue
         ]
         
         do {
