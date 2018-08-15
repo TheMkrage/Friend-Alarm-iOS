@@ -40,13 +40,48 @@ class AlarmStore: NSObject {
             case .success(let upload, _, _):
                 upload.responseJSON { response in
                     print("Succesfully uploaded")
-                    print(response.value)
-                    if let err = response.error{
+                    let jsonDecoder = JSONDecoder()
+                    guard let data = response.data else {
                         return
                     }
+                    do {
+                        let alarm = try jsonDecoder.decode(Alarm.self, from: data)
+                        var alarms = try? self.storage.object(ofType: [Alarm].self, forKey: "alarms") ?? []
+                        alarms?.append(alarm)
+                        try? self.storage.setObject(alarms, forKey: "alarms")
+                    } catch let error {
+                        print(error)
+                        print(response.value)
+                    }
+                    
+                    
                 }
             case .failure(let error):
                 print("Error in upload: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func get(callback: (([Alarm]) -> Void)?) {
+        let alarms = (try? self.storage.object(ofType: [Alarm].self, forKey: "alarms")) ?? []
+        callback?(alarms)
+        
+        guard let id = UserStore.shared.get()?.id else {
+            return
+        }
+        Alamofire.request("\(Backend.baseURL)/users/\(id)/alarms", method: .get, parameters: nil, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response) in
+            let jsonDecoder = JSONDecoder()
+            guard let data = response.data else {
+                return
+            }
+            do {
+                let alarms = try jsonDecoder.decode([Alarm].self, from: data)
+                callback?(alarms)
+                try? self.storage.setObject(alarms, forKey: "alarms")
+            } catch let error {
+                callback?([])
+                print(error)
+                print(response.value)
             }
         }
     }

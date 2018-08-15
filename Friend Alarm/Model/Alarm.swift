@@ -11,13 +11,13 @@ import UIKit
 class Alarm: Codable {
     var name: String
     var duration: Double
-    var userId: Int
+    var username: String
     var fileURL: String
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case duration = "duration"
-        case userId = "user_id"
+        case username = "username"
         case fileURL = "file_url"
     }
 }

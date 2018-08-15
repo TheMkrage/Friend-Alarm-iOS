@@ -8,6 +8,8 @@
 
 import UIKit
 import Anchorage
+import AVFoundation
+import Alamofire
 
 class MyAlarmViewController: UIViewController {
 
@@ -20,6 +22,20 @@ class MyAlarmViewController: UIViewController {
     var alarmTable = UITableView()
     
     var alarms = [Alarm]()
+    
+    var player: AVAudioPlayer?
+    var playingButton: UIButton? {
+        willSet {
+            self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AlarmStore.shared.get { (alarms) in
+            self.alarms = alarms
+            self.alarmTable.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +85,45 @@ class MyAlarmViewController: UIViewController {
         let nav = UINavigationController(rootViewController: vc)
         self.present(nav, animated: true, completion: nil)
     }
+    
+    @objc func play(sender: UIButton) {
+        let alarm = self.alarms[sender.tag]
+        guard let url = URL(string: alarm.fileURL) else {
+            print("Invalid URL")
+            return
+        }
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            var documentsURL = self.getDocumentsDirectory()
+            documentsURL.appendPathComponent("play.m4a")
+            return (documentsURL, [.removePreviousFile])
+        }
+        
+        Alamofire.download(url, to: destination).responseData { response in
+            if let destinationUrl = response.destinationURL {
+                print("complete! time to play")
+                // just stop playing if already playing
+                if self.player?.isPlaying ?? false {
+                    self.player?.stop()
+                    sender.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+                    return
+                }
+                do {
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                    try AVAudioSession.sharedInstance().setActive(true)
+                    
+                    self.player = try AVAudioPlayer(contentsOf: destinationUrl, fileTypeHint: AVFileType.m4a.rawValue)
+                    self.player?.delegate = self
+                    guard let player = self.player else { return }
+                    
+                    player.play()
+                    sender.setImage(#imageLiteral(resourceName: "stop-icon"), for: .normal)
+                    self.playingButton = sender
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
 }
 
 extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
@@ -84,8 +139,11 @@ extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
         let alarm = self.alarms[indexPath.row]
         
         let cell = AlarmTableViewCell(style: .default, reuseIdentifier: "Alarm")
-        cell.nameLabel.text = "name"
-        cell.userLabel.text = "user"
+        cell.nameLabel.text = alarm.name
+        cell.userLabel.text = alarm.username
+        
+        cell.playButton.addTarget(self, action: #selector(play(sender:)), for: .touchUpInside)
+        cell.playButton.tag = indexPath.row
         return cell
     }
     
@@ -93,5 +151,11 @@ extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
         view.tintColor = UIColor(named: "header-color")
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor(named: "header-text-color")
+    }
+}
+
+extension MyAlarmViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
     }
 }
