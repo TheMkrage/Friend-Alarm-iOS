@@ -28,8 +28,6 @@ class AddAlarmViewController: UIViewController {
     var recordButtonLabel = UILabel()
     var recordButtonImage = UIImageView()
     
-    var musicButton = UIButton()
-    
     var repeatLabel = TitleLabel()
     var repeatStepper = UIStepper()
     
@@ -64,10 +62,6 @@ class AddAlarmViewController: UIViewController {
         self.recordButtonView.addSubview(self.recordButtonLabel)
         self.recordButtonView.addSubview(self.recordButtonImage)
         
-        self.musicButton.backgroundColor = UIColor.init(named: "button-text-color")
-        self.musicButton.setTitleColor(UIColor.init(named: "tint-color"), for: .normal)
-        self.musicButton.setTitle("Music", for: .normal)
-        
         self.repeatLabel.text = "Repeat"
         self.repeatTimesLabel.font = UIFont(name: self.repeatTimesLabel.font.fontName, size: 11.0)
         self.repeatTimesLabel.text = "Times"
@@ -90,12 +84,13 @@ class AddAlarmViewController: UIViewController {
         self.createButton.layer.cornerRadius = 17.5
         self.createButton.addTarget(self, action: #selector(create), for: .touchUpInside)
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(close))
+        
         self.view.addSubview(self.nameLabel)
         self.view.addSubview(self.nameField)
         self.view.addSubview(self.alarmLabel)
         self.view.addSubview(self.alarmDescriptionLabel)
         self.view.addSubview(self.recordButtonView)
-        self.view.addSubview(self.musicButton)
         self.view.addSubview(self.repeatLabel)
         self.view.addSubview(self.repeatStepper)
         self.view.addSubview(self.self.repeatStackView)
@@ -121,6 +116,10 @@ class AddAlarmViewController: UIViewController {
         }
         
         self.setupConstraints()
+    }
+    
+    @objc func close() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -229,22 +228,17 @@ class AddAlarmViewController: UIViewController {
         self.alarmDescriptionLabel.topAnchor == self.alarmLabel.bottomAnchor
         self.alarmDescriptionLabel.leadingAnchor == self.view.leadingAnchor + 20
         
-        self.musicButton.leadingAnchor == self.view.leadingAnchor + 20
-        self.musicButton.topAnchor == self.alarmDescriptionLabel.bottomAnchor + 16
-        self.musicButton.widthAnchor == self.musicButton.heightAnchor
-        self.musicButton.trailingAnchor == self.recordButtonView.leadingAnchor - 40
-        
         self.recordButtonView.topAnchor == self.alarmDescriptionLabel.bottomAnchor + 16
         self.recordButtonView.trailingAnchor == self.view.trailingAnchor - 20
-        self.recordButtonView.widthAnchor == self.recordButtonView.heightAnchor
-        self.recordButtonView.widthAnchor == self.musicButton.widthAnchor
+        self.recordButtonView.heightAnchor == self.recordButtonView.widthAnchor * 0.5
+        self.recordButtonView.leadingAnchor == self.view.leadingAnchor + 20
         
         self.recordButtonImage.centerAnchors == self.recordButtonView.centerAnchors
         self.recordButtonLabel.bottomAnchor == self.recordButtonView.bottomAnchor - 15
         self.recordButtonLabel.centerXAnchor == self.recordButtonView.centerXAnchor
         
-        self.repeatLabel.centerXAnchor == self.musicButton.centerXAnchor
-        self.repeatLabel.topAnchor == self.musicButton.bottomAnchor + 28
+        self.repeatLabel.centerXAnchor == self.recordButtonView.centerXAnchor * 0.5
+        self.repeatLabel.topAnchor == self.recordButtonView.bottomAnchor + 28
         
         self.repeatStepper.topAnchor == self.repeatLabel.bottomAnchor + 15
         self.repeatStepper.centerXAnchor == self.repeatLabel.centerXAnchor
@@ -253,7 +247,7 @@ class AddAlarmViewController: UIViewController {
         self.repeatStackView.centerXAnchor == self.repeatStepper.centerXAnchor
         
         self.previewLabel.topAnchor == self.recordButtonView.bottomAnchor + 28
-        self.previewLabel.centerXAnchor == self.recordButtonView.centerXAnchor
+        self.previewLabel.centerXAnchor == self.recordButtonView.centerXAnchor * 1.5
         
         self.previewPlayButton.centerYAnchor == self.repeatStepper.centerYAnchor
         self.previewPlayButton.centerXAnchor == self.previewLabel.centerXAnchor

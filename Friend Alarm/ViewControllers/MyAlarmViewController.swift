@@ -26,7 +26,9 @@ class MyAlarmViewController: UIViewController {
     var player: AVAudioPlayer?
     var playingButton: UIButton? {
         willSet {
-            self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+            if self.playingButton != newValue {
+                self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+            }
         }
     }
     
@@ -97,16 +99,18 @@ class MyAlarmViewController: UIViewController {
             documentsURL.appendPathComponent("play.m4a")
             return (documentsURL, [.removePreviousFile])
         }
-        
+        // just stop playing if already playing
+        if self.player?.isPlaying ?? false {
+            self.player?.stop()
+            sender.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+            self.alarmTable.reloadData()
+            return
+        }
+        sender.setImage(#imageLiteral(resourceName: "stop-icon"), for: .normal)
         Alamofire.download(url, to: destination).responseData { response in
             if let destinationUrl = response.destinationURL {
                 print("complete! time to play")
-                // just stop playing if already playing
-                if self.player?.isPlaying ?? false {
-                    self.player?.stop()
-                    sender.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
-                    return
-                }
+                
                 do {
                     try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                     try AVAudioSession.sharedInstance().setActive(true)
@@ -116,8 +120,10 @@ class MyAlarmViewController: UIViewController {
                     guard let player = self.player else { return }
                     
                     player.play()
-                    sender.setImage(#imageLiteral(resourceName: "stop-icon"), for: .normal)
+                    
                     self.playingButton = sender
+                    
+                    
                 } catch let error {
                     print(error.localizedDescription)
                 }
@@ -142,6 +148,7 @@ extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
         cell.nameLabel.text = alarm.name
         cell.userLabel.text = alarm.username
         
+        cell.playButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
         cell.playButton.addTarget(self, action: #selector(play(sender:)), for: .touchUpInside)
         cell.playButton.tag = indexPath.row
         return cell
