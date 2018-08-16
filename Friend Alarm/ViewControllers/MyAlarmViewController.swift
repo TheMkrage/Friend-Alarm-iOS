@@ -14,7 +14,7 @@ import Alamofire
 class MyAlarmViewController: UIViewController {
 
     var alarmSwitch = UISwitch()
-    var alarmLabel = DatePickerLabel()
+    var alarmLabel = DatePickerLabel(initialTime: AlarmStore.shared.getLastAlarm())
     var tapToEdit = SmallTextLabel()
     
     let alarmScheduler = AlarmScheduler()
@@ -48,6 +48,9 @@ class MyAlarmViewController: UIViewController {
         self.alarmLabel.font = UIFont(name: "DS-Digital", size: 64)
         self.alarmLabel.textColor = UIColor(named: "alarm-red")
         self.alarmLabel.text = "alarm off"
+        self.alarmLabel.delegate = self
+        
+        self.alarmSwitch.addTarget(self, action: #selector(toggleAlarm(sender:)), for: .valueChanged)
         
         self.tapToEdit.text = "tap to edit"
         self.tapToEdit.textColor = UIColor(named: "alarm-red")
@@ -57,25 +60,17 @@ class MyAlarmViewController: UIViewController {
         self.alarmTable.separatorStyle = .none
         self.alarmTable.rowHeight = 70
         
-        self.timePicker.datePickerMode = .time
-        self.timePicker.backgroundColor = .white
-        
         self.navigationItem.setRightBarButton(UIBarButtonItem.init(title: "+", style: .plain, target: self, action: #selector(addAlarm)), animated: true)
         
         self.view.addSubview(self.alarmSwitch)
         self.view.addSubview(self.alarmLabel)
         self.view.addSubview(self.tapToEdit)
         self.view.addSubview(self.alarmTable)
-        //self.view.addSubview(self.timePicker)
         
         self.setupConstraints()
     }
     
     func setupConstraints() {
-        /*self.timePicker.bottomAnchor == self.tapToEdit.bottomAnchor
-        self.timePicker.topAnchor == self.alarmSwitch.topAnchor
-        self.timePicker.leadingAnchor == self.view.leadingAnchor + 20
-        self.timePicker.trailingAnchor == self.view.trailingAnchor - 20*/
         
         self.alarmSwitch.centerXAnchor == self.view.centerXAnchor
         self.alarmSwitch.topAnchor == self.view.safeAreaLayoutGuide.topAnchor + 20
@@ -96,6 +91,14 @@ class MyAlarmViewController: UIViewController {
         let vc = AddAlarmViewController()
         let nav = UINavigationController(rootViewController: vc)
         self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func toggleAlarm(sender: UISwitch) {
+        if sender.isOn {
+            self.alarmLabel.text = AlarmStore.shared.getLastAlarm()?.formatted ?? "TAP TO SET ALARM"
+        } else {
+            self.alarmLabel.text = "ALARM OFF"
+        }
     }
     
     @objc func play(sender: UIButton) {
@@ -174,5 +177,16 @@ extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
 extension MyAlarmViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+    }
+}
+
+extension MyAlarmViewController: DatePickerDelegate {
+    func timeChanged(time: Date) {
+        self.alarmSwitch.isOn = true
+    }
+    
+    func donePressed(time: Date) {
+        print("User selected \(time.formatted)")
+        self.alarmScheduler.scheduleAlarm(time: time)
     }
 }

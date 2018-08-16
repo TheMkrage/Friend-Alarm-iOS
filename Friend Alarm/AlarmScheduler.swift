@@ -9,5 +9,7 @@
 import UIKit
 
 class AlarmScheduler: NSObject {
-
+    func scheduleAlarm(time: Date) {
+        AlarmStore.shared.setLastAlarm(time: time)
+    }
 }

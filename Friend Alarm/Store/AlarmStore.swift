@@ -85,4 +85,12 @@ class AlarmStore: NSObject {
             }
         }
     }
+    
+    func getLastAlarm() -> Date? {
+        return try? self.storage.object(ofType: Date.self, forKey: "lastAlarm")
+    }
+    
+    func setLastAlarm(time: Date) {
+        try? self.storage.setObject(time, forKey: "lastAlarm")
+    }
 }

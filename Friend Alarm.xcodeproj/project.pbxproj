@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7E51424E211F78CD0040C87E /* AlarmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51424D211F78CD0040C87E /* AlarmStore.swift */; };
 		7E5142532125F24D0040C87E /* DatePickerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5142522125F24D0040C87E /* DatePickerLabel.swift */; };
+		7E51425621260F7C0040C87E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51425521260F7C0040C87E /* Date+Extension.swift */; };
 		7E6D459421115721005E3D1A /* DS-DIGI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEB8210FAAC5005A8659 /* DS-DIGI.ttf */; };
 		7E6D459521115723005E3D1A /* PingFang-SC-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE8DEBC210FB209005A8659 /* PingFang-SC-Light.ttf */; };
 		7E6D459821116121005E3D1A /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D459721116121005E3D1A /* Alarm.swift */; };
@@ -43,6 +44,7 @@
 		5BCE47CB75B68D97E96FCEE0 /* Pods_Friend_Alarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Friend_Alarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E51424D211F78CD0040C87E /* AlarmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStore.swift; sourceTree = "<group>"; };
 		7E5142522125F24D0040C87E /* DatePickerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerLabel.swift; sourceTree = "<group>"; };
+		7E51425521260F7C0040C87E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		7E6D459721116121005E3D1A /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		7E6D459A21116C54005E3D1A /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 		7E6D459C21117819005E3D1A /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				7E6D45A92111872C005E3D1A /* UISearchBar+Extension.swift */,
 				7E6D45B1211392F4005E3D1A /* UIViewController+Extension.swift */,
+				7E51425521260F7C0040C87E /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E51425621260F7C0040C87E /* Date+Extension.swift in Sources */,
 				7E6D45B2211392F4005E3D1A /* UIViewController+Extension.swift in Sources */,
 				7E6D45A521118172005E3D1A /* FriendCell.swift in Sources */,
 				7E6D46282119689D005E3D1A /* AddAlarmViewController.swift in Sources */,

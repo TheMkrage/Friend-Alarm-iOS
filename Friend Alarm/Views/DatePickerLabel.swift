@@ -8,13 +8,21 @@
 
 import UIKit
 
+@objc protocol DatePickerDelegate {
+    @objc optional func timeChanged(time: Date)
+    @objc optional func donePressed(time: Date)
+}
+
 class DatePickerLabel: UILabel {
+    
+    var delegate: DatePickerDelegate?
     
     private let _inputView: UIView? = {
         let picker = UIDatePicker()
         picker.backgroundColor = UIColor.init(named: "background-color")
         picker.datePickerMode = .time
         picker.setValue(UIColor.init(named: "tint-color"), forKey: "textColor")
+        picker.addTarget(self, action: #selector(timeChanged(sender:)), for: .valueChanged)
         return picker
     }()
     
@@ -38,8 +46,13 @@ class DatePickerLabel: UILabel {
         return _inputAccessoryToolbar
     }
     
-    convenience init() {
+    convenience init(initialTime: Date?) {
         self.init(frame: CGRect.zero)
+        guard let datePicker = self.inputView as? UIDatePicker,
+        let initialTime = initialTime else{
+            return
+        }
+        datePicker.date = initialTime
     }
     
     override init(frame: CGRect) {
@@ -69,7 +82,16 @@ class DatePickerLabel: UILabel {
         becomeFirstResponder()
     }
     
+    @objc private func timeChanged(sender: UIDatePicker) {
+        self.text = sender.date.formatted
+        self.delegate?.timeChanged?(time: sender.date)
+    }
+    
     @objc private func doneClick() {
         resignFirstResponder()
+        guard let datePicker = self.inputView as? UIDatePicker else {
+            fatalError()
+        }
+        self.delegate?.donePressed?(time: datePicker.date)
     }
 }
