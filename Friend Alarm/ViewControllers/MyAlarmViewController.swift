@@ -14,12 +14,13 @@ import Alamofire
 class MyAlarmViewController: UIViewController {
 
     var alarmSwitch = UISwitch()
-    var timeUntilAlarmLabel = UILabel()
-    var untilItsTimeToWakeUpLabel = SmallTextLabel()
+    var alarmLabel = DatePickerLabel()
+    var tapToEdit = SmallTextLabel()
     
     let alarmScheduler = AlarmScheduler()
     
     var alarmTable = UITableView()
+    var timePicker = UIDatePicker()
     
     var alarms = [Alarm]()
     
@@ -44,42 +45,51 @@ class MyAlarmViewController: UIViewController {
         
         self.title = "My Alarm"
         
-        self.timeUntilAlarmLabel.font = UIFont(name: "DS-Digital", size: 64)
-        self.timeUntilAlarmLabel.textColor = UIColor(named: "alarm-red")
-        self.timeUntilAlarmLabel.text = "alarm off"
+        self.alarmLabel.font = UIFont(name: "DS-Digital", size: 64)
+        self.alarmLabel.textColor = UIColor(named: "alarm-red")
+        self.alarmLabel.text = "alarm off"
         
-        self.untilItsTimeToWakeUpLabel.text = "until it's time to wake up"
-        self.untilItsTimeToWakeUpLabel.textColor = UIColor(named: "alarm-red")
+        self.tapToEdit.text = "tap to edit"
+        self.tapToEdit.textColor = UIColor(named: "alarm-red")
         
         self.alarmTable.delegate = self
         self.alarmTable.dataSource = self
         self.alarmTable.separatorStyle = .none
         self.alarmTable.rowHeight = 70
         
+        self.timePicker.datePickerMode = .time
+        self.timePicker.backgroundColor = .white
+        
         self.navigationItem.setRightBarButton(UIBarButtonItem.init(title: "+", style: .plain, target: self, action: #selector(addAlarm)), animated: true)
         
         self.view.addSubview(self.alarmSwitch)
-        self.view.addSubview(self.timeUntilAlarmLabel)
-        self.view.addSubview(self.untilItsTimeToWakeUpLabel)
+        self.view.addSubview(self.alarmLabel)
+        self.view.addSubview(self.tapToEdit)
         self.view.addSubview(self.alarmTable)
+        //self.view.addSubview(self.timePicker)
         
         self.setupConstraints()
     }
     
     func setupConstraints() {
+        /*self.timePicker.bottomAnchor == self.tapToEdit.bottomAnchor
+        self.timePicker.topAnchor == self.alarmSwitch.topAnchor
+        self.timePicker.leadingAnchor == self.view.leadingAnchor + 20
+        self.timePicker.trailingAnchor == self.view.trailingAnchor - 20*/
+        
         self.alarmSwitch.centerXAnchor == self.view.centerXAnchor
         self.alarmSwitch.topAnchor == self.view.safeAreaLayoutGuide.topAnchor + 20
         
-        self.timeUntilAlarmLabel.topAnchor == self.alarmSwitch.bottomAnchor + 20
-        self.timeUntilAlarmLabel.centerXAnchor == self.view.centerXAnchor
+        self.alarmLabel.topAnchor == self.alarmSwitch.bottomAnchor + 20
+        self.alarmLabel.centerXAnchor == self.view.centerXAnchor
         
-        self.untilItsTimeToWakeUpLabel.centerXAnchor == self.view.centerXAnchor
-        self.untilItsTimeToWakeUpLabel.topAnchor == self.timeUntilAlarmLabel.bottomAnchor
+        self.tapToEdit.centerXAnchor == self.view.centerXAnchor
+        self.tapToEdit.topAnchor == self.alarmLabel.bottomAnchor
         
         self.alarmTable.bottomAnchor == self.view.safeAreaLayoutGuide.bottomAnchor
         self.alarmTable.leadingAnchor == self.view.safeAreaLayoutGuide.leadingAnchor
         self.alarmTable.trailingAnchor == self.view.safeAreaLayoutGuide.trailingAnchor
-        self.alarmTable.topAnchor ==  self.untilItsTimeToWakeUpLabel.bottomAnchor + 40
+        self.alarmTable.topAnchor ==  self.tapToEdit.bottomAnchor + 40
     }
     
     @objc func addAlarm() {
