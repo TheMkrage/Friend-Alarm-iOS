@@ -93,4 +93,25 @@ class AlarmStore: NSObject {
     func setLastAlarm(time: Date) {
         try? self.storage.setObject(time, forKey: "lastAlarm")
     }
+    
+    func turnAlarmOn(time: Date, alarm: Alarm?) {
+        guard let id = UserStore.shared.get()?.id else {
+            return
+        }
+        var parameters = Dictionary<String, Any>()
+        parameters["alarm_id"] = alarm?.id ?? -1
+        parameters["time"] = DateFormatter.iso8601.string(from: time)
+        Alamofire.request("\(Backend.baseURL)/users/\(id)/schedule" , method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            print(response.value)
+        }
+    }
+    
+    func turnAlarmOff() {
+        guard let id = UserStore.shared.get()?.id else {
+            return
+        }
+        Alamofire.request("\(Backend.baseURL)/users/\(id)/schedule" , method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            print(response.value)
+        }
+    }
 }
