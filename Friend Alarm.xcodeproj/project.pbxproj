@@ -24,7 +24,6 @@
 		7E6D45B021126A96005E3D1A /* PickAUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45AF21126A96005E3D1A /* PickAUsernameViewController.swift */; };
 		7E6D45B2211392F4005E3D1A /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45B1211392F4005E3D1A /* UIViewController+Extension.swift */; };
 		7E6D45B421139588005E3D1A /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45B321139588005E3D1A /* Backend.swift */; };
-		7E6D45B62114DEA0005E3D1A /* AlarmScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45B52114DEA0005E3D1A /* AlarmScheduler.swift */; };
 		7E6D45DE21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45DD21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift */; };
 		7E6D45E02115752C005E3D1A /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D45DF2115752C005E3D1A /* AddFriendCell.swift */; };
 		7E6D462621157C60005E3D1A /* FriendStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D462521157C60005E3D1A /* FriendStore.swift */; };
@@ -45,6 +44,7 @@
 		7E51424D211F78CD0040C87E /* AlarmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStore.swift; sourceTree = "<group>"; };
 		7E5142522125F24D0040C87E /* DatePickerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerLabel.swift; sourceTree = "<group>"; };
 		7E51425521260F7C0040C87E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		7E514257212A203B0040C87E /* Friend Alarm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Friend Alarm.entitlements"; sourceTree = "<group>"; };
 		7E6D459721116121005E3D1A /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		7E6D459A21116C54005E3D1A /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 		7E6D459C21117819005E3D1A /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -57,7 +57,6 @@
 		7E6D45AF21126A96005E3D1A /* PickAUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickAUsernameViewController.swift; sourceTree = "<group>"; };
 		7E6D45B1211392F4005E3D1A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		7E6D45B321139588005E3D1A /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
-		7E6D45B52114DEA0005E3D1A /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmScheduler.swift; sourceTree = "<group>"; };
 		7E6D45DD21156F2F005E3D1A /* SearchResultsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewDataSource.swift; sourceTree = "<group>"; };
 		7E6D45DF2115752C005E3D1A /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
 		7E6D462521157C60005E3D1A /* FriendStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStore.swift; sourceTree = "<group>"; };
@@ -169,7 +168,7 @@
 		7EE8DEA0210FA44B005A8659 /* Friend Alarm */ = {
 			isa = PBXGroup;
 			children = (
-				7E6D45B52114DEA0005E3D1A /* AlarmScheduler.swift */,
+				7E514257212A203B0040C87E /* Friend Alarm.entitlements */,
 				7E6D45AB21125EA1005E3D1A /* Store */,
 				7E6D45A821118718005E3D1A /* Extensions */,
 				7E6D459921116C25005E3D1A /* Cells */,
@@ -260,6 +259,11 @@
 					7EE8DE9D210FA44B005A8659 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -368,7 +372,6 @@
 				7E6D45AA2111872C005E3D1A /* UISearchBar+Extension.swift in Sources */,
 				7E6D459F211180E1005E3D1A /* User.swift in Sources */,
 				7EE8DEA2210FA44B005A8659 /* AppDelegate.swift in Sources */,
-				7E6D45B62114DEA0005E3D1A /* AlarmScheduler.swift in Sources */,
 				7E6D459B21116C54005E3D1A /* AlarmTableViewCell.swift in Sources */,
 				7E6D462621157C60005E3D1A /* FriendStore.swift in Sources */,
 				7E51424E211F78CD0040C87E /* AlarmStore.swift in Sources */,
@@ -502,12 +505,15 @@
 			baseConfigurationReference = 023AFA0CAEAFD58DB4DCF3F4 /* Pods-Friend Alarm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Friend Alarm/Friend Alarm.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2MD9NK2MQ3;
+				DEVELOPMENT_TEAM = 2FKX4SDTGM;
 				INFOPLIST_FILE = "Friend Alarm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TheMkrage.Friend-Alarm";
+				PRODUCT_BUNDLE_IDENTIFIER = "Friend-Alarm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -518,12 +524,15 @@
 			baseConfigurationReference = A5D31E279D5AB0781E057CDC /* Pods-Friend Alarm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Friend Alarm/Friend Alarm.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2MD9NK2MQ3;
+				DEVELOPMENT_TEAM = 2FKX4SDTGM;
 				INFOPLIST_FILE = "Friend Alarm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TheMkrage.Friend-Alarm";
+				PRODUCT_BUNDLE_IDENTIFIER = "Friend-Alarm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

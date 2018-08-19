@@ -101,6 +101,7 @@ class AlarmStore: NSObject {
         var parameters = Dictionary<String, Any>()
         parameters["alarm_id"] = alarm?.id ?? -1
         parameters["time"] = DateFormatter.iso8601.string(from: time)
+        print(parameters["time"])
         Alamofire.request("\(Backend.baseURL)/users/\(id)/schedule" , method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             print(response.value)
         }

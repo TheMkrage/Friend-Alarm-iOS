@@ -17,8 +17,6 @@ class MyAlarmViewController: UIViewController {
     var alarmLabel = DatePickerLabel(initialTime: AlarmStore.shared.getLastAlarm())
     var tapToEdit = SmallTextLabel()
     
-    let alarmScheduler = AlarmScheduler()
-    
     var alarmTable = UITableView()
     var timePicker = UIDatePicker()
     
@@ -187,6 +185,6 @@ extension MyAlarmViewController: DatePickerDelegate {
     
     func donePressed(time: Date) {
         print("User selected \(time.formatted)")
-        self.alarmScheduler.scheduleAlarm(time: time)
+        AlarmStore.shared.turnAlarmOn(time: time, alarm: self.alarms.first)
     }
 }
