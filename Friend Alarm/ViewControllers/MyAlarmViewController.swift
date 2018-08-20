@@ -106,8 +106,10 @@ class MyAlarmViewController: UIViewController {
             return
         }
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            
             var documentsURL = self.getDocumentsDirectory()
             documentsURL.appendPathComponent("play.m4a")
+            
             return (documentsURL, [.removePreviousFile])
         }
         // just stop playing if already playing
@@ -121,12 +123,13 @@ class MyAlarmViewController: UIViewController {
         Alamofire.download(url, to: destination).responseData { response in
             if let destinationUrl = response.destinationURL {
                 print("complete! time to play")
-                
+                print(destinationUrl)
                 do {
                     try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                     try AVAudioSession.sharedInstance().setActive(true)
                     
                     self.player = try AVAudioPlayer(contentsOf: destinationUrl, fileTypeHint: AVFileType.m4a.rawValue)
+                    AlarmPlayer.shared.destinationURL = destinationUrl
                     self.player?.delegate = self
                     guard let player = self.player else { return }
                     

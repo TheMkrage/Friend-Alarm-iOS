@@ -8,12 +8,13 @@
 
 import UIKit
 import UserNotifications
+import AVKit
+import MediaPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -93,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getNotificationSettings() {
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                print("Notification settings: \(settings)")
+                //print("Notification settings: \(settings)")
                 guard settings.authorizationStatus == .authorized else { return }
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
@@ -128,6 +129,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("app delegate sees notification")
+        if (application.applicationState == .background) {
+            AlarmPlayer.shared.playAlarm()
+        }
+        completionHandler(.newData)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -144,4 +149,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-
