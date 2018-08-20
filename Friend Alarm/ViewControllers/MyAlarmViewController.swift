@@ -11,7 +11,7 @@ import Anchorage
 import AVFoundation
 import Alamofire
 
-class MyAlarmViewController: UIViewController {
+class MyAlarmViewController: AudioPlayingViewController {
 
     var alarmSwitch = UISwitch()
     var alarmLabel = DatePickerLabel(initialTime: AlarmStore.shared.getLastAlarm())
@@ -22,7 +22,6 @@ class MyAlarmViewController: UIViewController {
     
     var alarms = [Alarm]()
     
-    var player: AVAudioPlayer?
     var playingButton: UIButton? {
         willSet {
             if self.playingButton != newValue {
@@ -100,18 +99,7 @@ class MyAlarmViewController: UIViewController {
     }
     
     @objc func play(sender: UIButton) {
-        let alarm = self.alarms[sender.tag]
-        guard let url = URL(string: alarm.fileURL) else {
-            print("Invalid URL")
-            return
-        }
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            
-            var documentsURL = self.getDocumentsDirectory()
-            documentsURL.appendPathComponent("play.m4a")
-            
-            return (documentsURL, [.removePreviousFile])
-        }
+        
         // just stop playing if already playing
         if self.player?.isPlaying ?? false {
             self.player?.stop()
@@ -120,29 +108,8 @@ class MyAlarmViewController: UIViewController {
             return
         }
         sender.setImage(#imageLiteral(resourceName: "stop-icon"), for: .normal)
-        Alamofire.download(url, to: destination).responseData { response in
-            if let destinationUrl = response.destinationURL {
-                print("complete! time to play")
-                print(destinationUrl)
-                do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-                    try AVAudioSession.sharedInstance().setActive(true)
-                    
-                    self.player = try AVAudioPlayer(contentsOf: destinationUrl, fileTypeHint: AVFileType.m4a.rawValue)
-                    AlarmPlayer.shared.destinationURL = destinationUrl
-                    self.player?.delegate = self
-                    guard let player = self.player else { return }
-                    
-                    player.play()
-                    
-                    self.playingButton = sender
-                    
-                    
-                } catch let error {
-                    print(error.localizedDescription)
-                }
-            }
-        }
+        self.playOrDownload(alarm: self.alarms[sender.tag], sender: sender)
+        self.playingButton = sender
     }
 }
 
