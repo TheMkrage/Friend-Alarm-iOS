@@ -21,6 +21,7 @@ class MyAlarmViewController: AudioPlayingViewController {
     var timePicker = UIDatePicker()
     
     var alarms = [Alarm]()
+    lazy var selectedAlarm = self.alarms.first!
     
     var playingButton: UIButton? {
         willSet {
@@ -92,9 +93,17 @@ class MyAlarmViewController: AudioPlayingViewController {
     
     @objc func toggleAlarm(sender: UISwitch) {
         if sender.isOn {
-            self.alarmLabel.text = AlarmStore.shared.getLastAlarm()?.formatted ?? "TAP TO SET ALARM"
+            
+            guard let time = AlarmStore.shared.getLastAlarm() else {
+                self.alarmLabel.text = "TAP TO SET ALARM"
+                return
+            }
+            let formattedTime = time.formatted
+            self.alarmLabel.text = formattedTime
+            AlarmStore.shared.turnAlarmOn(time: time, alarm: self.selectedAlarm)
         } else {
             self.alarmLabel.text = "ALARM OFF"
+            AlarmStore.shared.turnAlarmOff()
         }
     }
     
@@ -155,6 +164,6 @@ extension MyAlarmViewController: DatePickerDelegate {
     
     func donePressed(time: Date) {
         print("User selected \(time.formatted)")
-        AlarmStore.shared.turnAlarmOn(time: time, alarm: self.alarms.first)
+        AlarmStore.shared.turnAlarmOn(time: time, alarm: self.selectedAlarm)
     }
 }

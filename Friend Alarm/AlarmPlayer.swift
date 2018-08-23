@@ -15,17 +15,20 @@ class AlarmPlayer: NSObject {
     private override init() {   }
     
     private var player: AVAudioPlayer? = AVAudioPlayer()
-    var destinationURL: URL?
     
-    func playAlarm() {
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func playAlarm(id: Int) {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .defaultToSpeaker])
             try AVAudioSession.sharedInstance().setActive(true)
             UIApplication.shared.beginReceivingRemoteControlEvents()
             
-            guard let url = self.destinationURL else {
-                fatalError("BAD")
-            }
+            let url = self.getDocumentsDirectory().appendingPathComponent("\(id).m4a")
+        
             self.player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.m4a.rawValue)
             guard let player = self.player else {
                 return

@@ -30,6 +30,7 @@ class UserStore: NSObject {
     func create(username: String, callback: ((User?) -> Void)?) {
         var dictionary = Dictionary<String, Any>()
         dictionary["username"] = username
+        dictionary["apn_token"] = UserDefaults.standard.string(forKey: "token")
         
         Alamofire.request("\(Backend.baseURL)/users", method: .post, parameters: dictionary, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response) in
             let jsonDecoder = JSONDecoder()
