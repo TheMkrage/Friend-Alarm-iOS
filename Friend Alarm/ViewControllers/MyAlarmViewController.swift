@@ -45,10 +45,21 @@ class MyAlarmViewController: AudioPlayingViewController {
         
         self.alarmLabel.font = UIFont(name: "DS-Digital", size: 64)
         self.alarmLabel.textColor = UIColor(named: "alarm-red")
-        self.alarmLabel.text = "alarm off"
         self.alarmLabel.delegate = self
         
+        self.alarmSwitch.isOn = AlarmStore.shared.isAlarmSet()
         self.alarmSwitch.addTarget(self, action: #selector(toggleAlarm(sender:)), for: .valueChanged)
+        
+        if self.alarmSwitch.isOn {
+            if let time = AlarmStore.shared.getLastAlarm() {
+                let formattedTime = time.formatted
+                self.alarmLabel.text = formattedTime
+            } else {
+                self.alarmLabel.text = "TAP TO SET ALARM"
+            }
+        } else {
+            self.alarmLabel.text = "ALARM OFF"
+        }
         
         self.tapToEdit.text = "tap to edit"
         self.tapToEdit.textColor = UIColor(named: "alarm-red")

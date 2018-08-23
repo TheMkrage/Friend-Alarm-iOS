@@ -90,18 +90,28 @@ class AlarmStore: NSObject {
         return try? self.storage.object(ofType: Date.self, forKey: "lastAlarm")
     }
     
-    func setLastAlarm(time: Date) {
+    private func setLastAlarm(time: Date) {
         try? self.storage.setObject(time, forKey: "lastAlarm")
     }
     
+    func isAlarmSet() -> Bool {
+        return (try? self.storage.object(ofType: Bool.self, forKey: "isAlarmSet")) ?? false
+    }
+    
+    private func set(isAlarmSet: Bool) {
+        try? self.storage.setObject(isAlarmSet, forKey: "isAlarmSet")
+    }
+    
     func turnAlarmOn(time: Date, alarm: Alarm?) {
-        guard let id = UserStore.shared.get()?.id else {
+        guard let id = UserStore.shared.get()?.id, time != self.getLastAlarm() else {
             return
         }
         var parameters = Dictionary<String, Any>()
         parameters["alarm_id"] = alarm?.id ?? -1
         parameters["time"] = DateFormatter.iso8601.string(from: time)
         print(parameters["time"])
+        self.setLastAlarm(time: time)
+        self.set(isAlarmSet: true)
         Alamofire.request("\(Backend.baseURL)/users/\(id)/schedule" , method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             print(response.value)
         }
@@ -111,6 +121,7 @@ class AlarmStore: NSObject {
         guard let id = UserStore.shared.get()?.id else {
             return
         }
+        self.set(isAlarmSet: false)
         Alamofire.request("\(Backend.baseURL)/users/\(id)/schedule" , method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             print(response.value)
         }
