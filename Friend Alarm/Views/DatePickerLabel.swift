@@ -52,7 +52,24 @@ class DatePickerLabel: UILabel {
         let initialTime = initialTime else{
             return
         }
-        datePicker.date = initialTime
+        
+        // translate the saved date into today's time
+        let calendar = Calendar.current
+        var scheduleComponents = calendar.dateComponents([.hour, .minute], from: initialTime)
+        
+        let today = Date()
+        let todayDayComponent = calendar.component(.day, from: today)
+        let todayMonthComponent = calendar.component(.month, from: today)
+        let todayYearComponent = calendar.component(.year, from: today)
+        scheduleComponents.setValue(todayDayComponent, for: .day)
+        scheduleComponents.setValue(todayMonthComponent, for: .month)
+        scheduleComponents.setValue(todayYearComponent, for: .year)
+        
+        guard let initialAdjustedDate = calendar.date(from: scheduleComponents) else {
+            return
+        }
+        //datePicker.minimumDate = initialAdjustedDate
+        datePicker.date = initialAdjustedDate
     }
     
     override init(frame: CGRect) {

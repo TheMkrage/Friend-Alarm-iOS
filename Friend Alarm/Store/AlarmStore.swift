@@ -108,7 +108,18 @@ class AlarmStore: NSObject {
         }
         var parameters = Dictionary<String, Any>()
         parameters["alarm_id"] = alarm?.id ?? -1
-        parameters["time"] = DateFormatter.iso8601.string(from: time)
+        
+        // if date has already passed today, schedule it for tomorrow
+        if time < Date() {
+            let calendar = Calendar.current
+            var components = DateComponents()
+            components.day = 1
+            let nextOccuranceOfTime = calendar.date(byAdding: components, to: time) ?? time
+            parameters["time"] = DateFormatter.iso8601.string(from: nextOccuranceOfTime)
+        } else {
+            parameters["time"] = DateFormatter.iso8601.string(from: time)
+        }
+        
         print(parameters["time"])
         self.setLastAlarm(time: time)
         self.set(isAlarmSet: true)
