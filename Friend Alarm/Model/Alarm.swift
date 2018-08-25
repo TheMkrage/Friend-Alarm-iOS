@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Alarm: Codable {
+class Alarm: Codable, Equatable {
     var id: Int
     var name: String
     var duration: Double
@@ -31,5 +31,9 @@ class Alarm: Codable {
         case fileURL = "file_url"
         case isHighPriority = "is_high_priority"
         case isSecret = "is_secret"
+    }
+    
+    static func ==(lhs: Alarm, rhs: Alarm) -> Bool {
+        return lhs.id == rhs.id
     }
 }

@@ -11,7 +11,15 @@ import AVKit
 import Alamofire
 
 class AudioPlayingViewController: UIViewController {
+    
     var player: AVAudioPlayer?
+    var playingButton: UIButton? {
+        willSet {
+            if self.playingButton != newValue {
+                self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
+            }
+        }
+    }
     
     func playOrDownload(alarm: Alarm, sender: UIButton) {
         guard let url = URL(string: alarm.fileURL) else {
@@ -56,5 +64,11 @@ class AudioPlayingViewController: UIViewController {
             }
             print(error.localizedDescription)
         }
+    }
+}
+
+extension AudioPlayingViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
     }
 }

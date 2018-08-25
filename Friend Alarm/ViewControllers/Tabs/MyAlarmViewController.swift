@@ -21,15 +21,7 @@ class MyAlarmViewController: AudioPlayingViewController {
     var timePicker = UIDatePicker()
     
     var alarms = [Alarm]()
-    lazy var selectedAlarm = self.alarms.first!
-    
-    var playingButton: UIButton? {
-        willSet {
-            if self.playingButton != newValue {
-                self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
-            }
-        }
-    }
+    var selectedAlarm: Alarm?
     
     override func viewWillAppear(_ animated: Bool) {
         AlarmStore.shared.get { (alarms) in
@@ -159,12 +151,6 @@ extension MyAlarmViewController: UITableViewDataSource, UITableViewDelegate {
         view.tintColor = UIColor(named: "header-color")
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor(named: "header-text-color")
-    }
-}
-
-extension MyAlarmViewController: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.playingButton?.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
     }
 }
 

@@ -127,6 +127,13 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor(named: "header-text-color")
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let friend = self.friends[indexPath.row]
+        let vc = AddAlarmForFriendViewController()
+        vc.friend = friend
+        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+    }
 }
 
 extension FriendsViewController: UISearchBarDelegate {

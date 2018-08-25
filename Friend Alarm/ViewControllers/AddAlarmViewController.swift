@@ -10,6 +10,10 @@ import UIKit
 import Anchorage
 import AVFoundation
 
+protocol AlarmCreatedDelegate {
+    func alarmCreated(alarm: Alarm)
+}
+
 class AddAlarmViewController: UIViewController {
 
     // Recording
@@ -42,6 +46,8 @@ class AddAlarmViewController: UIViewController {
     
     // makes sure playback plays the audio as many times as deemed necssary by the stepper
     var timesPlayed = 0
+    
+    var alarmCreatedDelegate: AlarmCreatedDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,8 +138,9 @@ class AddAlarmViewController: UIViewController {
     
     @objc func create() {
         let data = try? Data(contentsOf: getDocumentsDirectory().appendingPathComponent("recording.m4a"))
-        AlarmStore.shared.create(audioData: data, name: self.nameField.text!, duration: 1) { (isSuccessful) in
-            if isSuccessful {
+        AlarmStore.shared.create(audioData: data, name: self.nameField.text!, duration: 1) { (alarm) in
+            if let alarm = alarm {
+                self.alarmCreatedDelegate?.alarmCreated(alarm: alarm)
                 self.dismiss(animated: true, completion: nil)
             }
         }

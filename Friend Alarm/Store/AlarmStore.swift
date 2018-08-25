@@ -17,7 +17,7 @@ class AlarmStore: NSObject {
     private override init() {   }
     
     func create(audioData: Data?, name: String, duration: Int, callback:
-        ((Bool) -> ())?){
+        ((Alarm?) -> ())?){
         var parameters = Dictionary<String, Any>()
         parameters["name"] = name
         parameters["duration"] = duration
@@ -50,16 +50,16 @@ class AlarmStore: NSObject {
                         var alarms = try? self.storage.object(ofType: [Alarm].self, forKey: "alarms") ?? []
                         alarms?.append(alarm)
                         try? self.storage.setObject(alarms, forKey: "alarms")
-                        callback?(true)
+                        callback?(alarm)
                     } catch let error {
                         print(error)
                         print(response.value)
-                        callback?(false)
+                        callback?(nil)
                     }
                 }
             case .failure(let error):
                 print("Error in upload: \(error.localizedDescription)")
-                callback?(false)
+                callback?(nil)
             }
         }
     }
