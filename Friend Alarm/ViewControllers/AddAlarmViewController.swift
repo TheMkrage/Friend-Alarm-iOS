@@ -132,9 +132,11 @@ class AddAlarmViewController: UIViewController {
     
     @objc func create() {
         let data = try? Data(contentsOf: getDocumentsDirectory().appendingPathComponent("recording.m4a"))
-        print(data)
-        print(" ")
-        AlarmStore.shared.create(audioData: data, name: self.nameField.text!, duration: 1)
+        AlarmStore.shared.create(audioData: data, name: self.nameField.text!, duration: 1) { (isSuccessful) in
+            if isSuccessful {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: - Audio Recording

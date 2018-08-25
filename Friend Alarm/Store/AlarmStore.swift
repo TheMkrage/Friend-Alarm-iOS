@@ -16,7 +16,8 @@ class AlarmStore: NSObject {
     lazy var storage = try! Storage(diskConfig: diskConfig)
     private override init() {   }
     
-    func create(audioData: Data?, name: String, duration: Int){
+    func create(audioData: Data?, name: String, duration: Int, callback:
+        ((Bool) -> ())?){
         var parameters = Dictionary<String, Any>()
         parameters["name"] = name
         parameters["duration"] = duration
@@ -49,15 +50,16 @@ class AlarmStore: NSObject {
                         var alarms = try? self.storage.object(ofType: [Alarm].self, forKey: "alarms") ?? []
                         alarms?.append(alarm)
                         try? self.storage.setObject(alarms, forKey: "alarms")
+                        callback?(true)
                     } catch let error {
                         print(error)
                         print(response.value)
+                        callback?(false)
                     }
-                    
-                    
                 }
             case .failure(let error):
                 print("Error in upload: \(error.localizedDescription)")
+                callback?(false)
             }
         }
     }
@@ -103,7 +105,7 @@ class AlarmStore: NSObject {
     }
     
     func turnAlarmOn(time: Date, alarm: Alarm?) {
-        guard let id = UserStore.shared.get()?.id, time != self.getLastAlarm() else {
+        guard let id = UserStore.shared.get()?.id, time != self.getLastAlarm() || !self.isAlarmSet() else {
             return
         }
         var parameters = Dictionary<String, Any>()

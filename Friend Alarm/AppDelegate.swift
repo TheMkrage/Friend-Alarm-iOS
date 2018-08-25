@@ -129,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("app delegate sees notification")
-        if application.applicationState == .background, let id = userInfo["id"] as? Int {
+        if application.applicationState == .background, let id = userInfo["id"] as? Int, AlarmStore.shared.isAlarmSet() {
             AlarmPlayer.shared.playAlarm(id: id)
         }
         completionHandler(.newData)
