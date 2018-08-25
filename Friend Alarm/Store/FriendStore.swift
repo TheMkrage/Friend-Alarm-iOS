@@ -8,6 +8,7 @@
 
 import UIKit
 import Cache
+import Alamofire
 
 class FriendStore: NSObject {
     static var shared = FriendStore()
@@ -33,6 +34,26 @@ class FriendStore: NSObject {
         } else {
             friends.append(user)
             try? self.storage.setObject(friends, forKey: "friends")
+        }
+    }
+    
+    func addAlarm(friendId: Int, isSecret: Bool, isHighPriority: Bool, alarmId: Int, callback: @escaping (Bool) -> ()) {
+        guard let userId = UserStore.shared.get()?.id else {
+            return
+        }
+        var dictionary = Dictionary<String, Any>()
+        dictionary["referrer_id"] = userId
+        dictionary["owner_id"] = friendId
+        dictionary["is_secret"] = isSecret
+        dictionary["is_high_priority"] = isHighPriority
+        dictionary["alarm_id"] = alarmId
+        
+        Alamofire.request("\(Backend.baseURL)/user_alarms", method: .post, parameters: dictionary, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response) in
+            guard let statusCode = response.response?.statusCode else {
+                callback(false)
+                return
+            }
+            callback(statusCode == 201)
         }
     }
 }

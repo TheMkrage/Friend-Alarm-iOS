@@ -94,7 +94,16 @@ class AddAlarmForFriendViewController: AudioPlayingViewController {
     }
     
     @objc func add() {
-        // TODO: Add
+        guard let alarmId = self.selectedAlarm?.id else {
+            return
+        }
+        FriendStore.shared.addAlarm(friendId: self.friend.id, isSecret: self.secretSwitch.isOn, isHighPriority: self.highPrioritySwitch.isOn, alarmId: alarmId) { (isSuccess) in
+            print(isSuccess)
+            print("uploaded")
+            if isSuccess {
+                self.close()
+            }
+        }
     }
     
     @objc func play(sender: UIButton) {
