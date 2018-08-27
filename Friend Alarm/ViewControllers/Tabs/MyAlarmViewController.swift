@@ -111,7 +111,11 @@ class MyAlarmViewController: AudioPlayingViewController {
     }
     
     @objc func play(sender: UIButton) {
-        
+        let alarm = self.alarms[sender.tag]
+        if alarm.isSecret {
+            self.alert(title: "This alarm is a secret!", message: "\(alarm.username) wants you to hear this alarm in the morning, not now!" )
+            return
+        }
         // just stop playing if already playing
         if self.player?.isPlaying ?? false {
             self.player?.stop()
@@ -120,7 +124,7 @@ class MyAlarmViewController: AudioPlayingViewController {
             return
         }
         sender.setImage(#imageLiteral(resourceName: "stop-icon"), for: .normal)
-        self.playOrDownload(alarm: self.alarms[sender.tag], sender: sender)
+        self.playOrDownload(alarm: alarm, sender: sender)
         self.playingButton = sender
     }
 }

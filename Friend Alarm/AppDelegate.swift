@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        UIApplication.shared.statusBarStyle = .lightContent
         
         // ViewController and TabItem setup
         let myAlarmViewController = UINavigationController(rootViewController: MyAlarmViewController())
@@ -129,8 +130,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("app delegate sees notification")
-        if application.applicationState == .background, let id = userInfo["id"] as? Int, AlarmStore.shared.isAlarmSet() {
-            AlarmPlayer.shared.playAlarm(id: id)
+        if application.applicationState == .background, let id = userInfo["id"] as? Int, AlarmStore.shared.isAlarmSet(), let isSecond = userInfo["isSecond"] as? Bool {
+            if isSecond {
+                if UserDefaults.standard.bool(forKey: "needsToAlarm") {
+                    UserDefaults.standard.setValue(false, forKey: "needsToAlarm")
+                    AlarmPlayer.shared.playAlarm(id: id, remoteUrl: userInfo["url"] as? String)
+                }
+            } else {
+                AlarmPlayer.shared.playAlarm(id: id, remoteUrl: userInfo["url"] as? String)
+            }
         }
         completionHandler(.newData)
     }
