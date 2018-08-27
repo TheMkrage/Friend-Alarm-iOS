@@ -32,20 +32,10 @@ class AddAlarmViewController: UIViewController {
     var recordButtonLabel = UILabel()
     var recordButtonImage = UIImageView()
     
-    var repeatLabel = TitleLabel()
-    var repeatStepper = UIStepper()
-    
-    var repeatNumberLabel = TitleLabel()
-    var repeatTimesLabel = TitleLabel()
-    lazy var repeatStackView = UIStackView(arrangedSubviews: [repeatNumberLabel, repeatTimesLabel])
-    
     var previewLabel = TitleLabel()
     var previewPlayButton = UIButton()
     
     var createButton = UIButton()
-    
-    // makes sure playback plays the audio as many times as deemed necssary by the stepper
-    var timesPlayed = 0
     
     var alarmCreatedDelegate: AlarmCreatedDelegate?
     
@@ -68,17 +58,6 @@ class AddAlarmViewController: UIViewController {
         self.recordButtonView.addSubview(self.recordButtonLabel)
         self.recordButtonView.addSubview(self.recordButtonImage)
         
-        self.repeatLabel.text = "Repeat"
-        self.repeatTimesLabel.font = UIFont(name: self.repeatTimesLabel.font.fontName, size: 11.0)
-        self.repeatTimesLabel.text = "Times"
-        self.repeatNumberLabel.text = "\(1)"
-        self.repeatNumberLabel.font = UIFont(name: self.repeatNumberLabel.font.fontName, size: 24.0)
-        self.repeatStackView.spacing = 6
-        self.repeatStepper.value = 1
-        self.repeatStepper.minimumValue = 1
-        self.repeatStepper.tintColor = UIColor.init(named: "dark-mode-orange")
-        self.repeatStepper.addTarget(self, action: #selector(stepperChanged(sender:)), for: .valueChanged)
-        
         self.previewLabel.text = "Preview"
         self.previewPlayButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
         self.previewPlayButton.addTarget(self, action: #selector(playRecordedAudio), for: .touchUpInside)
@@ -97,9 +76,6 @@ class AddAlarmViewController: UIViewController {
         self.view.addSubview(self.alarmLabel)
         self.view.addSubview(self.alarmDescriptionLabel)
         self.view.addSubview(self.recordButtonView)
-        self.view.addSubview(self.repeatLabel)
-        self.view.addSubview(self.repeatStepper)
-        self.view.addSubview(self.self.repeatStackView)
         self.view.addSubview(self.previewLabel)
         self.view.addSubview(self.previewPlayButton)
         self.view.addSubview(self.createButton)
@@ -130,10 +106,6 @@ class AddAlarmViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }
-    
-    @objc func stepperChanged(sender: UIStepper) {
-        self.repeatNumberLabel.text = "\(Int(sender.value))"
     }
     
     @objc func create() {
@@ -246,20 +218,11 @@ class AddAlarmViewController: UIViewController {
         self.recordButtonLabel.bottomAnchor == self.recordButtonView.bottomAnchor - 15
         self.recordButtonLabel.centerXAnchor == self.recordButtonView.centerXAnchor
         
-        self.repeatLabel.centerXAnchor == self.recordButtonView.centerXAnchor * 0.5
-        self.repeatLabel.topAnchor == self.recordButtonView.bottomAnchor + 28
-        
-        self.repeatStepper.topAnchor == self.repeatLabel.bottomAnchor + 15
-        self.repeatStepper.centerXAnchor == self.repeatLabel.centerXAnchor
-        
-        self.repeatStackView.topAnchor == self.repeatStepper.bottomAnchor + 11
-        self.repeatStackView.centerXAnchor == self.repeatStepper.centerXAnchor
-        
         self.previewLabel.topAnchor == self.recordButtonView.bottomAnchor + 28
-        self.previewLabel.centerXAnchor == self.recordButtonView.centerXAnchor * 1.5
+        self.previewLabel.centerXAnchor == self.view.centerXAnchor
         
-        self.previewPlayButton.centerYAnchor == self.repeatStepper.centerYAnchor
-        self.previewPlayButton.centerXAnchor == self.previewLabel.centerXAnchor
+        self.previewPlayButton.topAnchor == self.previewLabel.bottomAnchor + 15
+        self.previewPlayButton.centerXAnchor == self.view.centerXAnchor
         
         self.createButton.bottomAnchor == self.view.safeAreaLayoutGuide.bottomAnchor - 40
         self.createButton.centerXAnchor == self.view.centerXAnchor
@@ -278,11 +241,6 @@ extension AddAlarmViewController: AVAudioRecorderDelegate {
 
 extension AddAlarmViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.timesPlayed = self.timesPlayed + 1
-        if self.timesPlayed < Int(self.repeatStepper.value) {
-            self.playRecordedAudio()
-        } else {
-            self.previewPlayButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
-        }
+        self.previewPlayButton.setImage(#imageLiteral(resourceName: "play-button"), for: .normal)
     }
 }
