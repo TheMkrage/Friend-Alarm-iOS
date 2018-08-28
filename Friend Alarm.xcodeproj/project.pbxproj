@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7E2EC607213523B1000C74EF /* Untitled.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7E2EC606213520C2000C74EF /* Untitled.m4a */; };
+		7E2EC60921352AFC000C74EF /* friend-alarm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E2EC60821352AFC000C74EF /* friend-alarm-icon.png */; };
+		7E2EC60B21352B6B000C74EF /* friend-alarm-logo-no-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E2EC60A21352B6B000C74EF /* friend-alarm-logo-no-back.png */; };
+		7E2EC60D21352C4A000C74EF /* Friend Alarm Text.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E2EC60C21352C4A000C74EF /* Friend Alarm Text.png */; };
 		7E3EA89721310BCB0034D825 /* AddAlarmForFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3EA89621310BCB0034D825 /* AddAlarmForFriendViewController.swift */; };
 		7E51424E211F78CD0040C87E /* AlarmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51424D211F78CD0040C87E /* AlarmStore.swift */; };
 		7E5142532125F24D0040C87E /* DatePickerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5142522125F24D0040C87E /* DatePickerLabel.swift */; };
@@ -46,6 +49,9 @@
 		023AFA0CAEAFD58DB4DCF3F4 /* Pods-Friend Alarm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friend Alarm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Friend Alarm/Pods-Friend Alarm.debug.xcconfig"; sourceTree = "<group>"; };
 		5BCE47CB75B68D97E96FCEE0 /* Pods_Friend_Alarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Friend_Alarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E2EC606213520C2000C74EF /* Untitled.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Untitled.m4a; sourceTree = "<group>"; };
+		7E2EC60821352AFC000C74EF /* friend-alarm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friend-alarm-icon.png"; sourceTree = "<group>"; };
+		7E2EC60A21352B6B000C74EF /* friend-alarm-logo-no-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friend-alarm-logo-no-back.png"; sourceTree = "<group>"; };
+		7E2EC60C21352C4A000C74EF /* Friend Alarm Text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Friend Alarm Text.png"; sourceTree = "<group>"; };
 		7E3EA89621310BCB0034D825 /* AddAlarmForFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmForFriendViewController.swift; sourceTree = "<group>"; };
 		7E51424D211F78CD0040C87E /* AlarmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStore.swift; sourceTree = "<group>"; };
 		7E5142522125F24D0040C87E /* DatePickerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerLabel.swift; sourceTree = "<group>"; };
@@ -203,7 +209,10 @@
 				7E6D459621116110005E3D1A /* Model */,
 				7EE8DEA1210FA44B005A8659 /* AppDelegate.swift */,
 				7EE8DEA8210FA44B005A8659 /* Assets.xcassets */,
+				7E2EC60821352AFC000C74EF /* friend-alarm-icon.png */,
 				7E2EC606213520C2000C74EF /* Untitled.m4a */,
+				7E2EC60C21352C4A000C74EF /* Friend Alarm Text.png */,
+				7E2EC60A21352B6B000C74EF /* friend-alarm-logo-no-back.png */,
 				7EE8DEAA210FA44B005A8659 /* LaunchScreen.storyboard */,
 				7EE8DEAD210FA44B005A8659 /* Info.plist */,
 				7EE8DEB5210FAA7C005A8659 /* fonts */,
@@ -320,6 +329,9 @@
 			files = (
 				7E6D459421115721005E3D1A /* DS-DIGI.ttf in Resources */,
 				7EE8DEAC210FA44B005A8659 /* LaunchScreen.storyboard in Resources */,
+				7E2EC60D21352C4A000C74EF /* Friend Alarm Text.png in Resources */,
+				7E2EC60921352AFC000C74EF /* friend-alarm-icon.png in Resources */,
+				7E2EC60B21352B6B000C74EF /* friend-alarm-logo-no-back.png in Resources */,
 				7EE8DEA9210FA44B005A8659 /* Assets.xcassets in Resources */,
 				7E6D459521115723005E3D1A /* PingFang-SC-Light.ttf in Resources */,
 				7E2EC607213523B1000C74EF /* Untitled.m4a in Resources */,
