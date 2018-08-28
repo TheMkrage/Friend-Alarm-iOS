@@ -95,6 +95,7 @@ class AddAlarmForFriendViewController: AudioPlayingViewController {
     
     @objc func add() {
         guard let alarmId = self.selectedAlarm?.id else {
+            self.alert(title: "Select an alarm!", message: "Select or create a new alarm for your friend!")
             return
         }
         FriendStore.shared.addAlarm(friendId: self.friend.id, isSecret: self.secretSwitch.isOn, isHighPriority: self.highPrioritySwitch.isOn, alarmId: alarmId) { (isSuccess) in
@@ -173,7 +174,7 @@ extension AddAlarmForFriendViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Alarms"
+        return "Choose an Alarm Below"
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

@@ -30,6 +30,8 @@ class AddFriendCell: UITableViewCell {
         self.addSubview(self.usernameLabel)
         self.addSubview(self.addFriendButton)
         
+        self.selectionStyle = .none
+        
         self.setupConstraints()
     }
     

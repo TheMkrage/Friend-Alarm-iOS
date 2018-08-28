@@ -10,6 +10,7 @@ import UIKit
 import Anchorage
 import AVFoundation
 import Alamofire
+import Presentr
 
 class MyAlarmViewController: AudioPlayingViewController {
 
@@ -67,6 +68,13 @@ class MyAlarmViewController: AudioPlayingViewController {
         self.view.addSubview(self.alarmLabel)
         self.view.addSubview(self.tapToEdit)
         self.view.addSubview(self.alarmTable)
+        
+        if !UserStore.shared.hasRegisteredUsername() {
+            let vc = PickAUsernameViewController()
+            let presentr = Presentr(presentationType: .dynamic(center: .center))
+            presentr.keyboardTranslationType = .moveUp
+            self.customPresentViewController(presentr, viewController: vc, animated: true)
+        }
         
         self.setupConstraints()
     }

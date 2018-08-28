@@ -51,6 +51,7 @@ class AddAlarmViewController: UIViewController {
         self.alarmDescriptionLabel.text = "Make sure it could wake somebody up!"
         
         self.recordButtonView.backgroundColor = UIColor.init(named: "button-text-color")
+        self.recordButtonImage.image = #imageLiteral(resourceName: "record")
         self.recordButtonLabel.textColor = UIColor.init(named: "tint-color")
         self.recordButtonLabel.text = "Record"
         self.recordButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(countdownAndRecord)))
@@ -109,8 +110,12 @@ class AddAlarmViewController: UIViewController {
     }
     
     @objc func create() {
+        guard let name = self.nameField.text else {
+            self.alert(title: "Oops!", message: "Please give the alarm a name")
+            return
+        }
         let data = try? Data(contentsOf: getDocumentsDirectory().appendingPathComponent("recording.m4a"))
-        AlarmStore.shared.create(audioData: data, name: self.nameField.text!, duration: 1) { (alarm) in
+        AlarmStore.shared.create(audioData: data, name: name, duration: 1) { (alarm) in
             if let alarm = alarm {
                 self.alarmCreatedDelegate?.alarmCreated(alarm: alarm)
                 self.dismiss(animated: true, completion: nil)
@@ -137,6 +142,7 @@ class AddAlarmViewController: UIViewController {
     }
     
     private func getAudioFileURL() -> URL {
+        print(getDocumentsDirectory().appendingPathComponent("recording.m4a"))
         return getDocumentsDirectory().appendingPathComponent("recording.m4a")
     }
     
@@ -147,14 +153,21 @@ class AddAlarmViewController: UIViewController {
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey:44100,
             AVNumberOfChannelsKey:2,
-            AVEncoderAudioQualityKey:AVAudioQuality.max.rawValue
+            AVEncoderAudioQualityKey:AVAudioQuality.max.rawValue,
         ]
         
         do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.delegate = self
-            audioRecorder.record()
-            
+            if audioRecorder.prepareToRecord() {
+                audioRecorder.record()
+            } else {
+                print("not ready to record")
+            }
+            self.recordButtonImage.image = #imageLiteral(resourceName: "stop-record")
             self.recordButtonLabel.text = "Tap to Stop"
         } catch {
             finishRecording(success: false)
@@ -165,6 +178,7 @@ class AddAlarmViewController: UIViewController {
         audioRecorder.stop()
         audioRecorder = nil
         
+        self.recordButtonImage.image = #imageLiteral(resourceName: "record")
         if success {
             self.recordButtonLabel.text = "Tap to Re-record"
         } else {
@@ -183,7 +197,7 @@ class AddAlarmViewController: UIViewController {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
             
-            player = try AVAudioPlayer(contentsOf: self.getAudioFileURL(), fileTypeHint: AVFileType.mp3.rawValue)
+            player = try AVAudioPlayer(contentsOf: self.getAudioFileURL(), fileTypeHint: AVFileType.m4a.rawValue)
             player?.delegate = self
             guard let player = player else { return }
             

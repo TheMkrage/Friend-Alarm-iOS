@@ -129,7 +129,12 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let friend = self.friends[indexPath.row]
+        var friend: User!
+        if self.isSearching {
+            friend = self.searchResults[indexPath.row]
+        } else {
+            friend = self.friends[indexPath.row]
+        }
         let vc = AddAlarmForFriendViewController()
         vc.friend = friend
         self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)

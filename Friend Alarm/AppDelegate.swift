@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabViewController.selectedIndex = 0
         
         tabViewController.tabBar.items?[0].title = "My Alarm"
+        tabViewController.tabBar.items?[1].title = "Friends"
         
         self.window?.backgroundColor = UIColor.init(named: "background-color")
         self.window?.rootViewController = tabViewController
