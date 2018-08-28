@@ -9,6 +9,7 @@
 import UIKit
 import Anchorage
 import AVFoundation
+import JGProgressHUD
 
 protocol AlarmCreatedDelegate {
     func alarmCreated(alarm: Alarm)
@@ -115,7 +116,12 @@ class AddAlarmViewController: UIViewController {
             return
         }
         let data = try? Data(contentsOf: getDocumentsDirectory().appendingPathComponent("recording.m4a"))
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Loading"
+        hud.show(in: self.view)
+        
         AlarmStore.shared.create(audioData: data, name: name, duration: 1) { (alarm) in
+            hud.dismiss(animated: true)
             if let alarm = alarm {
                 self.alarmCreatedDelegate?.alarmCreated(alarm: alarm)
                 self.dismiss(animated: true, completion: nil)

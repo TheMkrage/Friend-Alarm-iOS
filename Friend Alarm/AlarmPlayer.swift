@@ -30,13 +30,12 @@ class AlarmPlayer: NSObject {
     }
     
     func playAlarm(id: Int, remoteUrl: String?) {
+        
         let urlToAudioFile = self.getDocumentsDirectory().appendingPathComponent("\(id).m4a")
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .defaultToSpeaker])
             try AVAudioSession.sharedInstance().setActive(true)
             UIApplication.shared.beginReceivingRemoteControlEvents()
-            
-            
         
             if FileManager.default.fileExists(atPath: urlToAudioFile.path) {
                 self.player = try AVAudioPlayer(contentsOf: urlToAudioFile, fileTypeHint: AVFileType.m4a.rawValue)
@@ -44,15 +43,9 @@ class AlarmPlayer: NSObject {
                 guard let player = self.player else {
                     return
                 }
-                player.numberOfLoops = 3
+                player.numberOfLoops = 10
                 let volumeView = MPVolumeView()
                 volumeView.volumeSlider.value = 1.0
-                let commandCenter = MPRemoteCommandCenter.shared()
-                
-                commandCenter.pauseCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
-                    player.pause()
-                    return .success
-                }
                 
                 player.play()
                 UserDefaults.standard.setValue(false, forKey: "needsToAlarm")
@@ -100,7 +93,25 @@ class AlarmPlayer: NSObject {
     
     private func playDefaultAlarm() {
         print("play default")
-        UserDefaults.standard.setValue(false, forKey: "needsToAlarm")
+        do {
+            
+            guard let url = Bundle.main.url(forResource: "Untitled", withExtension:"m4a") else {
+                fatalError()
+            }
+            self.player = try AVAudioPlayer.init(contentsOf: url, fileTypeHint: "m4a")
+            
+            guard let player = self.player else {
+                return
+            }
+            player.numberOfLoops = 10
+            let volumeView = MPVolumeView()
+            volumeView.volumeSlider.value = 1.0
+            
+            player.play()
+            UserDefaults.standard.setValue(false, forKey: "needsToAlarm")
+        } catch {
+            print("caught")
+        }
     }
 }
 

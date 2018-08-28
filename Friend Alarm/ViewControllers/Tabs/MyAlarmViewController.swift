@@ -26,7 +26,7 @@ class MyAlarmViewController: AudioPlayingViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         AlarmStore.shared.get { (alarms) in
-            self.alarms = alarms
+            self.alarms = alarms.reversed()
             self.alarmTable.reloadData()
         }
     }
@@ -48,7 +48,7 @@ class MyAlarmViewController: AudioPlayingViewController {
                 let formattedTime = time.formatted
                 self.alarmLabel.text = formattedTime
             } else {
-                self.alarmLabel.text = "TAP TO SET ALARM"
+                self.alarmLabel.text = "TAP TO SET"
             }
         } else {
             self.alarmLabel.text = "ALARM OFF"

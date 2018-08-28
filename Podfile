@@ -12,4 +12,5 @@ target 'Friend Alarm' do
   pod 'Cache'
   pod 'Alamofire'
   pod 'Presentr'
+  pod 'JGProgressHUD'
 end

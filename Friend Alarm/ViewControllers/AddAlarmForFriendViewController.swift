@@ -8,6 +8,7 @@
 
 import UIKit
 import Anchorage
+import JGProgressHUD
 
 class AddAlarmForFriendViewController: AudioPlayingViewController {
     
@@ -98,11 +99,24 @@ class AddAlarmForFriendViewController: AudioPlayingViewController {
             self.alert(title: "Select an alarm!", message: "Select or create a new alarm for your friend!")
             return
         }
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Loading"
+        hud.show(in: self.view)
         FriendStore.shared.addAlarm(friendId: self.friend.id, isSecret: self.secretSwitch.isOn, isHighPriority: self.highPrioritySwitch.isOn, alarmId: alarmId) { (isSuccess) in
             print(isSuccess)
             print("uploaded")
+            hud.dismiss()
             if isSuccess {
-                self.close()
+                if self.highPrioritySwitch.isOn {
+                    self.alert(title: "Added alarm to \(self.friend.username)'s queue", message: "This alarm will play the next time \(self.friend.username) uses their alarm! Nice!", completion: {
+                        self.close()
+                    })
+                } else {
+                    self.alert(title: "Added alarm to \(self.friend.username)'s queue", message: "This alarm is now available for \(self.friend.username) to use!", completion: {
+                        self.close()
+                    })
+                }
+                
             }
         }
     }

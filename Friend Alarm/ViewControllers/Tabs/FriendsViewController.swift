@@ -132,6 +132,10 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         var friend: User!
         if self.isSearching {
             friend = self.searchResults[indexPath.row]
+            if !FriendStore.shared.isFriend(user: friend) {
+                FriendStore.shared.toggleFriend(user: friend)
+                tableView.reloadData()
+            }
         } else {
             friend = self.friends[indexPath.row]
         }

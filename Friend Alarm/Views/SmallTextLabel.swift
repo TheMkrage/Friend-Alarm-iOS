@@ -20,7 +20,7 @@ class SmallTextLabel: UILabel {
     }
     
     func initialize() {
-        self.font = UIFont(name: "HelveticaNeue-Thin", size: 12)
+        self.font = UIFont(name: "HelveticaNeue-Thin", size: 13)
         self.textColor = UIColor.init(named: "small-text-color")
     }
 }
