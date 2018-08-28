@@ -20,6 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         UIApplication.shared.statusBarStyle = .lightContent
         
+        let fileManager = FileManager.default
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        do {
+            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+            print(fileURLs)
+            // process files
+        } catch {
+            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
+        }
+        
         // ViewController and TabItem setup
         let myAlarmViewController = UINavigationController(rootViewController: MyAlarmViewController())
         let friendsViewController = UINavigationController(rootViewController: FriendsViewController())
@@ -117,6 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        AlarmPlayer.shared.stop()
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
 
