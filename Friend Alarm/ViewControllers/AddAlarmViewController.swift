@@ -109,8 +109,12 @@ class AddAlarmViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
+
     @objc func create() {
+        if self.audioRecorder != nil && self.audioRecorder.isRecording {
+            audioRecorder.stop()
+            audioRecorder = nil
+        }
         guard let name = self.nameField.text else {
             self.alert(title: "Oops!", message: "Please give the alarm a name")
             return
